@@ -17,11 +17,11 @@ class CreateProductsTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('shortname');
-            $table->string('resume');
-            $table->string('description');
+            $table->string('fonctional_description');
+            $table->string('technical_description');
             $table->double('price');
             $table->integer('stock_quantity');
-            $table->integer('promotion')->nullable();
+            $table->float('promotion')->nullable();
             $table->string('image');
             $table->dateTime('available_at');
             $table->timestamps();

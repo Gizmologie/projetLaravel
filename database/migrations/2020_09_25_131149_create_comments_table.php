@@ -18,13 +18,21 @@ class CreateCommentsTable extends Migration
             $table->string('title');
             $table->string('content');
             $table->integer('rate');
+            $table->boolean('is_visible');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('product_id');
             $table->timestamps();
 
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')
                 ->onDelete('CASCADE')
+            ;
+
+            $table->foreign('product_id')
+                ->references('id')
+                ->on('products')
+                ->onDelete('SET NULL')
             ;
         });
     }
