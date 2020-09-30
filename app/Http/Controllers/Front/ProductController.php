@@ -3,10 +3,26 @@
 namespace App\Http\Controllers\Front;
 
 use App\Http\Controllers\Controller;
+use App\Services\MailerService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 
 class ProductController extends Controller
 {
+    /**
+     * @var MailerService
+     */
+    private $mailerService;
+
+    /**
+     * ProductController constructor.
+     * @param MailerService $mailerService
+     */
+    public function __construct(MailerService $mailerService)
+    {
+        $this->mailerService = $mailerService;
+    }
+
     public function list(){
         $products = [
             0 => [
@@ -43,5 +59,16 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
         ];
 
         return view('pages.products.show', ['product' => $product]);
+    }
+
+    public function testMail(){
+        $response = $this->mailerService->sendMail([
+            'Email' => 'benjamin.robert90@gmail.com',
+            'Name' => 'Benjamin Robert'
+        ], 'Test de mail', 'mails.test', ['param' => 'Coucou c\'est moi']);
+
+       dump($response->success(), $response->getData());
+       die;
+
     }
 }

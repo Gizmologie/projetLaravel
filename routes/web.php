@@ -15,3 +15,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [ProductController::class, 'list']);
+Route::get('/testMail', [ProductController::class, 'testMail']);
