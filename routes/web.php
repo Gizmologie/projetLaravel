@@ -14,5 +14,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', [ProductController::class, 'list']);
 Route::get('/testMail', [ProductController::class, 'testMail']);
+
+// Route administration
+Route::get('/adminUser', 'AdminController@indexUser')->name('adminUser');
+Route::get('/adminProduct', 'AdminController@indexProduct')->name('adminProduct');
+
+
+Auth::routes();
+
+Route::get('/logout', function () {
+    Auth::logout();
+    return redirect()->route('home');
+});
+
+
