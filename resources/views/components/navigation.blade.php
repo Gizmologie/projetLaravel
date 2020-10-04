@@ -32,7 +32,7 @@
                     <a class="nav-link" href="#">{{ \Illuminate\Support\Facades\Auth::user()->name}}</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{url('/logout')}}">Déconnexion</a>
+                    <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>
                 </li>
                 @if(\Illuminate\Support\Facades\Auth::user()->roles == 'admin')
 

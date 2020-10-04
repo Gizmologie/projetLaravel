@@ -1,4 +1,4 @@
-@extends('layouts.base')
+@extends('admin.base')
 
 @section('content')
 
@@ -17,8 +17,13 @@
                                 <p>Création du compte le {{$user->created_at->format('d/m/Y à H:m')}}</p>
 
                                 {{-- Boutton --}}
-                                <button type="button" class="btn btn-warning">Modifier</button>
-                                <button type="button" class="btn btn-danger">Banier</button>
+                                <a href="{{route('detailsUser', ['id' => $user->id])}}" class="btn btn-warning">Modifier</a>
+
+                                <form action="{{route('deleteUser', ['id' => $user->id])}}" method="post">
+                                    @csrf
+                                    @method('delete')
+                                    <button type="submit" class="btn btn-danger">Banir</button>
+                                </form>
 
                                 {{-- Fin Boutton --}}
 

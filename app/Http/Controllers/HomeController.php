@@ -27,4 +27,10 @@ class HomeController extends Controller
         $products = Product::all();
         return view('home')->with('products', $products);
     }
+
+    public function setToHome ()
+    {
+        $products = Product::all();
+        return view('/home')->with('products', $products);
+    }
 }
