@@ -58,6 +58,8 @@ class AdminController extends Controller
         $params = $request->validated();
         $post = User::findOrFail($id);
         $post->update($params);
+        //dd($post);
+        //return back();
         return redirect()->route('adminUser');
     }
 }

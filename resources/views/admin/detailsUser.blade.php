@@ -20,7 +20,7 @@
         </div>
         <div class="form-group">
             <label>roles</label>
-            <input type="text" class="form-control" name="roles" value="{{$user->roles}}" required>
+            <input type="text" class="form-control" name="roles" value="{{$user->roles}}">
         </div>
         <button type="submit" class="btn btn-primary">Modifier</button>
         @include('components.errors')
