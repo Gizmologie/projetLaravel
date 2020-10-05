@@ -1,6 +1,6 @@
 @if($product)
     <div class="card h-100">
-        <a href="#"><img class="card-img-top" src="{{ $product['picture'] }}" alt="{{ $product['name'] }}"></a>
+        <a href="#"><img class="card-img-top" src="{{ $product['image'] }}" alt="{{ $product['name'] }}"></a>
         <div class="card-body">
             <h4 class="card-title">
                 <a href="#">{{ $product['name'] }}</a>
