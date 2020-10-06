@@ -27,14 +27,20 @@ class AdminController extends Controller
         return view('admin.adminProduct')->with('products', $products);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getDetailsUser($id)
     {
         $users = User::where('id', $id)->firstOrFail();
-        return view('detailsUser')
-            ->with('users', $users)
-            ;
+        return view('detailsUser')->with('users', $users);
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function detailsUser($id)
     {
         $user = User::findOrFail($id);
@@ -53,13 +59,16 @@ class AdminController extends Controller
         return back();
     }
 
+    /**
+     * @param UpdateUserRequest $request
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateUser(UpdateUserRequest $request, $id)
     {
         $params = $request->validated();
         $post = User::findOrFail($id);
         $post->update($params);
-        //dd($post);
-        //return back();
         return redirect()->route('adminUser');
     }
 }
