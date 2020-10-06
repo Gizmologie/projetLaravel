@@ -2,34 +2,46 @@
 
 @section('content')
 
-    <h5> Administration utilisateur</h5>
-
+    <h5> Administration Produit</h5>
+    <br><br>
     <div class="row">
+        <div class="col-md-3">Name</div>
+        <div class="col-md-3">Price</div>
+        <div class="col-md-3">Stock quantity</div>
+        <div class="col-md-3">Actions</div>
+        <br><br>
         @foreach($products as $product)
-
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="card-body">
-                                <h5 class="card-title">Name : {{ $product->name }}</h5>
-                                <p class="card-text">Shortname : {{ $product->shortname }}</p>
-                                <p class="card-text">Description : {{ $product->fonctional_description }}</p>
-                                <p class="card-text">Prix : {{ $product->price }}€</p>
-                                <p class="card-text">Stock : {{ $product->stock_quantity }}</p>
-                                <p class="card-text">Disponible le : {{ $product->available_at }}</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <img src="{{ asset('storage/'.$product->image) }}" height="300" width="200" default="pas d'image">
-                        </div>
+            <br><br>
+            <div class="col-md-3">{{ $product->name }}</div>
+            <div class="col-md-3">{{ $product->slug }}</div>
+            <div class="col-md-3">{{ $product->stock_quantity }}</div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a href="{{route('detailsProduct', ['id' => $product->id])}}" class="btn btn-warning">Modifier</a>
+                    </div>
+                    <div class="col-md-6">
+                        <form action="{{route('deleteProduct', ['id' => $product->id])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger">Supprimer</button>
+                        </form>
                     </div>
                 </div>
             </div>
+
         @endforeach
     </div>
 
 
+    <style>
+        div {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 1000px;
+        }
+    </style>
 
 
 @endsection

@@ -42,7 +42,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="{{route('adminUser')}}">Utilisateurs</a>
-                            <a class="dropdown-item" href="{{route('adminProduct')}}">Articles</a>
+                            <a class="dropdown-item" href="{{route('adminProduct')}}">Produits</a>
                         </div>
                     </li>
                 @endif
