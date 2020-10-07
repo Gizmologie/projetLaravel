@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->text('functional_description');
             $table->text('technical_description');
             $table->double('price');
+            $table->double('base_price');
             $table->integer('stock_quantity');
             $table->float('promotion')->nullable();
             $table->string('image');

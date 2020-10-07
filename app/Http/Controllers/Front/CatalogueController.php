@@ -11,33 +11,28 @@ use Illuminate\View\View;
 
 class CatalogueController extends Controller
 {
+
+    /** @var array $results */
+    private $results;
+
+    /** @var array $selected */
+    private $selected;
+
+
     /**
      * @param Request $request
      * @return Factory|View
      */
     public function list(Request $request){
 
-        $categories = $request->query->get('categories', []);
-
-        if ($categories){
-            $data = Product::whereIn('category_id', $categories);
-        }else{
-            $data = Product::where('category_id', '!=', null);
-        }
-
-        $selected = [
-            'categories' => $categories
-        ];
-
-        $data = $data->where('stock_quantity', '>', 0);
-
-        $data = $data->get();
+        $this->filter($request);
 
         $products = [];
         $row = [];
         $cpt = 0;
         $total = 3;
-        foreach ($data as $datum) {
+
+        foreach ($this->results as $datum) {
             if ($cpt == $total){
                 $products[] = $row;
                 $cpt = 0;
@@ -46,17 +41,61 @@ class CatalogueController extends Controller
             $row[] = $datum;
             $cpt ++;
         }
-        if (count($data) % $total !== 0){
+
+        if (count($this->results) % $total !== 0){
             while (count($row) < $total){
                 $row[] = null;
             }
+        }
+        if (count($row) > 0){
             $products[] = $row;
+
         }
 
         return view('pages.catalogue.list', [
             'products' => $products,
             'categories' => Category::where('level', '=', 1)->get(),
-            'selected' => $selected
+            'selected' => $this->selected,
+            'paginator' => $this->results,
         ]);
+    }
+
+    private function filter(Request $request){
+        $categories = $request->query->get('categories', []);
+
+        $this->selected = [
+            'categories' => $categories,
+        ];
+
+        if ($categories){
+            $this->results = Product::whereIn('category_id', $categories);
+        }else{
+            $this->results = Product::where('category_id', '!=', null);
+        }
+
+        foreach (['price', 'promotion'] as $numberFilter) {
+            $value = $request->query->get($numberFilter, []);
+            $min = isset($value['min']) ? $value['min'] : null;
+            $max = isset($value['max']) ? $value['max'] : null;
+
+            if ($min){
+                $this->results = $this->results->where($numberFilter, '>=', $min);
+            }
+
+            if ($max){
+                $this->results = $this->results->where($numberFilter, '<=', $max);
+            }
+            $this->selected[$numberFilter] = [
+                'min' => $min,
+                'max' => $max
+            ];
+        }
+
+
+
+        $this->results = $this->results->where('stock_quantity', '>', 0);
+
+        $this->results = $this->results->orderBy('price');
+        $this->results = $this->results->paginate(18);
     }
 }

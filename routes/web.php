@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index'])->name('home');
+Route::get('/', [CatalogueController::class, 'list'])->name('home');
 Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
