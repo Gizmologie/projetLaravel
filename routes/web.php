@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\CatalogueController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,12 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [IndexController::class, 'index']);
+Route::get('/', [IndexController::class, 'index'])->name('home');
 Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
-// Home route
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/setToHome', 'HomeController@setToHome')->name('setToHome'); // ne fonctionne pas
 
 
 // Route administration
@@ -41,7 +39,7 @@ Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('del
 // Route authentification
 Route::get('/logout', function () {
     Auth::logout();
-    return redirect()->route('setToHome');
+    return redirect()->route('home');
 })->name('logout');
 
 
