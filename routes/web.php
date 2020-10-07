@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Front\CatalogueController;
+use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,5 +16,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class, 'list']);
+Route::get('/', [IndexController::class, 'index']);
+Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);

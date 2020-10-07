@@ -24,49 +24,6 @@ class ProductController extends Controller
         $this->mailerService = $mailerService;
     }
 
-    public function list(){
-        $data = Product::all();
-        $products = [];
-        $row = [];
-        $cpt = 0;
-        $total = 3;
-        foreach ($data as $datum) {
-            if ($cpt == $total){
-                $products[] = $row;
-                $cpt = 0;
-                $row = [];
-            }
-            $row[] = $datum;
-            $cpt ++;
-        }
-        if (count($data) % $total !== 0){
-            while (count($row) < $total){
-                $row[] = null;
-            }
-            $products[] = $row;
-        }
-
-//        dump($products);
-//        die;
-//
-//        $products = [
-//            0 => [
-////                0 => ["picture" => "http://placehold.it/700x400", "price" => 900, "name" => "Iphone X", "resume" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!", "category" => ["name" => "Téléphone"]],
-//                1 => ["picture" => "http://placehold.it/700x400", "price" => 15.99, "name" => "Jain - Zanaka", "resume" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!", "category" => ["name" => "Musique"]],
-//                2 => ["picture" => "http://placehold.it/700x400", "price" => 349, "name" => "Bose - QC35", "resume" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!", "category" => ["name" => "Casque"]],
-//            ],
-//            1 => [
-//                0 => ["name" => "Monopoly classique Hasbro", "resume" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!", "picture" => "http://placehold.it/700x400", "price" => 19.99, "category" => ["name" => "Jouet"]],
-//                1 => null,
-//                2 => null
-//            ]
-//        ];
-
-        return view('pages.products.list', [
-            'products' => $products
-        ]);
-    }
-
     public function show($slug, $id){
         $product = [
             "picture" => "http://placehold.it/700x400",
