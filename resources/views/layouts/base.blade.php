@@ -9,7 +9,10 @@
 </head>
 <body>
     @include('components.navigation')
-    @include('components.category')
+    <div class="container">
+        @section('content')
+        @show
+    </div>
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 
     @section('javascript')

@@ -72,11 +72,10 @@ class ProductsSeeder extends Seeder
 
         foreach ($products as $product) {
             $category = Category::where('slug', '=', Str::slug($product['type']))->first();
-            if (!$category){
-                dump($product, Str::slug($product['type']), $category);
-                die;
-            }
             $category_id = $category ? $category->id : null;
+
+            $promotion = ($rand = rand(5,30)) % 7 == 0 ? floatval($rand) : null;
+
             Product::create([
                 'name' => $product['name'],
                 'slug' => Str::slug($product['name']),
@@ -88,9 +87,10 @@ class ProductsSeeder extends Seeder
                     levis dictata sunt. Quid sequatur, quid repugnet, vident. 
                     Respondeat totidem verbis. Duo Reges: constructio interrete. Avaritiamne minuis? Si id dicis, vicimus.
                     Tu enim ista lenius, hic Stoicorum more nos vexat. Duo enim genera quae erant, fecit tria. Non igitur bene. ',
-                'price' => $product['price'],
+                'price' => number_format($product['price'] - ($product['price'] * ($promotion / 100)), 2, '.', ''),
+                'base_price' => $product['price'],
                 'stock_quantity' => rand(0, 100),
-                'promotion' => ($rand = rand(5,30)) % 7 == 0 ? floatval($rand) : null,
+                'promotion' => $promotion,
                 'image' => 'images/products/' . Str::slug($product['name']) . '.jpg',
                 'category_id' => $category_id,
                 'available_at' => rand() % 12 == 0 ? (new DateTime('now'))->add(new DateInterval('P' . rand(1, 40) .'D')) : (new DateTime('now')),
