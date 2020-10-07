@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Product;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
@@ -46,7 +48,7 @@ class AdminController extends Controller
     public function detailsUser($id)
     {
         $user = User::findOrFail($id);
-        return view('admin.detailsUser')->with('user', $user);
+        return view('admin.updateUser')->with('user', $user);
     }
 
     /**
@@ -81,7 +83,7 @@ class AdminController extends Controller
     public function detailsProduct ($id)
     {
         $product = Product::findOrFail($id);
-        return view('admin.detailsProduct')->with('product', $product);
+        return view('admin.updateProduct')->with('product', $product);
     }
 
     /**
@@ -97,10 +99,34 @@ class AdminController extends Controller
         return redirect()->route('adminProduct');
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function removeProduct ($id)
     {
         $product = Product::findOrFail($id);
         $product->delete();
         return back();
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function createUser ()
+    {
+        return view('admin.createUser');
+    }
+
+    /**
+     * @param StoreUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeUser (StoreUserRequest $request)
+    {
+        $params = $request->validated();
+        $params['password'] = Hash::make($params['password']);
+        User::create($params);
+        return redirect()->route('adminUser');
     }
 }

@@ -29,7 +29,9 @@
             @if(\Illuminate\Support\Facades\Auth::check())
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">{{ \Illuminate\Support\Facades\Auth::user()->name}}</a>
+                    <a class="nav-link" href="{{route('profil',  ['id' => \Illuminate\Support\Facades\Auth::user()->id])}}">
+                        {{ \Illuminate\Support\Facades\Auth::user()->name}}
+                    </a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('logout')}}">Déconnexion</a>

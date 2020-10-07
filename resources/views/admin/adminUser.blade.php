@@ -3,6 +3,9 @@
 @section('content')
 
     <h5> Administration utilisateur</h5>
+    <div class="col-md-6">
+        <a href="{{route('createUser')}}" class="btn btn-primary">Nouvel utilisateur</a>
+    </div>
     <br><br>
     <div class="row">
         <div class="col-md-2">Name</div>

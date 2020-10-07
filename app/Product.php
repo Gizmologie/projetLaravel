@@ -24,7 +24,6 @@ class  Product extends Model
         'promotion',
         'image',
         'available_at',
-
     ];
 
 }

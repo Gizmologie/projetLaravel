@@ -22,11 +22,17 @@ Route::get('/setToHome', 'HomeController@setToHome')->name('setToHome'); // ne f
 Route::get('/', [ProductController::class, 'list']);
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
+
+// Route utilisateur
+Route::get('/profil/{id}', 'UserController@profil')->name('profil');
+
 // Route administration
 // Administation User
 Route::get('/adminUser', 'AdminController@indexUser')->name('adminUser');
 Route::get('/detailsUser/{id}', 'AdminController@detailsUser')->name('detailsUser');
 Route::get('/adminUser/{id}', 'AdminController@getDetailsUser')->name('getDetailsUser'); // Possiblement obsolete
+Route::get('/createUser', 'AdminController@createUser')->name('createUser');
+Route::post('/storeUser', 'AdminController@storeUser')->name('storeUser');
 Route::post('admin/{id}/updateUser', 'AdminController@updateUser')->name('updateUser');
 Route::delete('/deleteUser/{id}', 'AdminController@removeUser')->name('deleteUser');
 
