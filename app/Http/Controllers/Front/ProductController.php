@@ -30,11 +30,11 @@ class ProductController extends Controller
             "price" => 900,
             "name" => "Iphone X",
             "resume" => "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Amet numquam aspernatur!",
-            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Huius ego nunc auctoritatem sequens idem faciam. Inde igitur, inquit, ordiendum est. Audeo dicere, inquit. Ut pulsi recurrant? 
+            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Huius ego nunc auctoritatem sequens idem faciam. Inde igitur, inquit, ordiendum est. Audeo dicere, inquit. Ut pulsi recurrant?
 
-Peccata paria. Que Manilium, ab iisque M. Non semper, inquam; Si enim ad populum me vocas, eum. At enim hic etiam dolore. Quibusnam praeteritis? Sed nimis multa. 
+Peccata paria. Que Manilium, ab iisque M. Non semper, inquam; Si enim ad populum me vocas, eum. At enim hic etiam dolore. Quibusnam praeteritis? Sed nimis multa.
 
-Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non potest. Non quam nostram quidem, inquit Pomponius iocans; Neutrum vero, inquit ille. Non quam nostram quidem, inquit Pomponius iocans; Quid nunc honeste dicit? Quis non odit sordidos, vanos, leves, futtiles? 
+Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non potest. Non quam nostram quidem, inquit Pomponius iocans; Neutrum vero, inquit ille. Non quam nostram quidem, inquit Pomponius iocans; Quid nunc honeste dicit? Quis non odit sordidos, vanos, leves, futtiles?
 
 ',
             "category" => ["name" => "Téléphone"]
@@ -51,6 +51,11 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
 
        dump($response->success(), $response->getData());
        die;
+    }
 
+    public function productDetails ($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('pages.product.detailsProduct')->with('product', $product);
     }
 }

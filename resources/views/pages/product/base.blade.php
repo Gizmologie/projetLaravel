@@ -4,23 +4,26 @@
     <meta charset="UTF-8">
     <title>@section('title')Site de E-commerce @show</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
 
     @section('styles')@show
 </head>
 <body>
 @include('components.navigation')
-@if(\Illuminate\Support\Facades\Auth::user()->roles == 'admin')
-    <div class="col-12 col-md-9">
-        <div class="container my-5">
-            @section('content')
-            @show
-        </div>
+
+<div class="col-12 col-md-9">
+    <div class="container my-5">
+        @section('content')
+        @show
     </div>
+</div>
+
 @section('javascript')
 @show
-@else
-    @include('admin.unauthorize')
-@endif
+
 
 <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
 </body>

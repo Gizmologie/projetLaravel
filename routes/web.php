@@ -21,6 +21,9 @@ Route::get('/', [CatalogueController::class, 'list'])->name('home');
 Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
+// Route produit
+Route::get('/productDetails/{id}', [ProductController::class, 'productDetails'])->name('productDetails');
+
 
 // Route utilisateur
 Route::get('/profil/{id}', 'UserController@profil')->name('profil');

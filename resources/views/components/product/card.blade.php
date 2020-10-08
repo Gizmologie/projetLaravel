@@ -3,7 +3,7 @@
         <a href="#"><img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}"></a>
         <div class="card-body">
             <h4 class="card-title">
-                <a href="#">{{ $product->name }}</a>
+                <a href="{{route('productDetails', ['id' => $product->id])}}">{{ $product->name }}</a>
             </h4>
             @if($product->promotion > 0)
                 <del style="font-size: 15px">{{ $product->base_price }} €</del>
