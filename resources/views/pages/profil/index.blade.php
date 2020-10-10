@@ -14,7 +14,7 @@
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
                                 <h4>{{$user->name}}</h4>
-                                <button class="btn btn-outline-warning">Modifier</button>
+                                <a href="{{route('updatePassword', ['id' => $user->id])}}" class="btn btn-outline-warning">Modifier password</a>
                                 <button class="btn btn-outline-danger">Supprimer</button>
                             </div>
                         </div>

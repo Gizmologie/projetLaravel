@@ -27,12 +27,14 @@ Route::get('/productDetails/{id}', [ProductController::class, 'productDetails'])
 
 // Route utilisateur
 Route::get('/profil/{id}', 'UserController@profil')->name('profil');
+Route::get('/updatePassword/{id}', 'UserController@updatePassword')->name('updatePassword');
+Route::post('changePassword/{id}', 'UserController@changePassword')->name('passwordChange');
 
 // Route administration
 // Administation User
 Route::get('/adminUser', 'AdminController@indexUser')->name('adminUser');
-Route::get('/detailsUser/{id}', 'AdminController@detailsUser')->name('detailsUser');
-Route::get('/adminUser/{id}', 'AdminController@getDetailsUser')->name('getDetailsUser'); // Possiblement obsolete
+Route::get('/detailsUser/{id}', 'AdminController@detailsUser')->name('detailsUser'); // route vers page
+Route::get('/adminUser/{id}', 'AdminController@getDetailsUser')->name('getDetailsUser');
 Route::get('/createUser', 'AdminController@createUser')->name('createUser');
 Route::post('/storeUser', 'AdminController@storeUser')->name('storeUser');
 Route::post('admin/{id}/updateUser', 'AdminController@updateUser')->name('updateUser');
