@@ -20,6 +20,7 @@ class  Product extends Model
         'functional_description',
         'technical_description',
         'price',
+        'base_price',
         'stock_quantity',
         'promotion',
         'image',

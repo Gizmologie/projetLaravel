@@ -3,6 +3,9 @@
 @section('content')
 
     <h5> Administration Produit</h5>
+    <div class="col-md-6">
+        <a href="{{route('createProduct')}}" class="btn btn-primary">Nouveau produit</a>
+    </div>
     <br><br>
     <div class="row">
         <div class="col-md-3">Name</div>

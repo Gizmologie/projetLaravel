@@ -36,7 +36,9 @@ Route::get('/adminUser', 'AdminController@indexUser')->name('adminUser');
 Route::get('/detailsUser/{id}', 'AdminController@detailsUser')->name('detailsUser'); // route vers page
 Route::get('/adminUser/{id}', 'AdminController@getDetailsUser')->name('getDetailsUser');
 Route::get('/createUser', 'AdminController@createUser')->name('createUser');
+Route::get('/createProduct', 'AdminController@createProduct')->name('createProduct');
 Route::post('/storeUser', 'AdminController@storeUser')->name('storeUser');
+Route::post('/storeProduct', 'AdminController@storeProduct')->name('storeProduct');
 Route::post('admin/{id}/updateUser', 'AdminController@updateUser')->name('updateUser');
 Route::delete('/deleteUser/{id}', 'AdminController@removeUser')->name('deleteUser');
 

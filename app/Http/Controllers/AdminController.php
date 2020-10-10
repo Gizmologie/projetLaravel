@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateUserRequest;
@@ -9,6 +10,7 @@ use App\Product;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AdminController extends Controller
 {
@@ -57,7 +59,6 @@ class AdminController extends Controller
      */
     public function removeUser($id)
     {
-        //dump($id);
         $user = User::findOrFail($id);
         $user->delete();
         return back();
@@ -106,6 +107,7 @@ class AdminController extends Controller
     public function removeProduct ($id)
     {
         $product = Product::findOrFail($id);
+        Storage::delete('public/'.$product->image);
         $product->delete();
         return back();
     }
@@ -128,5 +130,26 @@ class AdminController extends Controller
         $params['password'] = Hash::make($params['password']);
         User::create($params);
         return redirect()->route('adminUser');
+    }
+
+
+    public function createProduct ()
+    {
+        return view('admin.createProduct');
+    }
+
+    public function storeProduct (StoreProductRequest $request)
+    {
+        $params = $request->validated();
+        //$request->image->store('image', 'public');
+        Storage::put('public/images/products', $params['image']);
+        $params['image'] = 'images/products/'. $params['image']->hashName();
+        if(isset($params['promotion'])) {
+            $params['price'] = $params['base_price'] - ($params['base_price'] * ($params['promotion']/100));
+        } else {
+            $params['price'] = $params['base_price'];
+        }
+        Product::create($params);
+        return redirect()->route('adminProduct');
     }
 }
