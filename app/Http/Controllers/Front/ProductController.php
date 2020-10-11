@@ -57,11 +57,9 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
 
     public function productDetails ($id)
     {
-        $user_id = Auth::id();
+        $user_id = Auth::id(); // si besoin d'avoir ID pour commentaire affichés
         $product = Product::findOrFail($id);
-        $comments = Comment::where('product_id', $id);//->where('user_id', $user_id);
-        dump($product);
-        dump($comments);
+        $comments = Comment::where('product_id', $id)->get();
         return view('pages.product.detailsProduct')->with('product', $product)->with('comments', $comments);
     }
 }

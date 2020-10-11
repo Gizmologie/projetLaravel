@@ -15,4 +15,9 @@ class Comment extends Model
      * @var array
      */
     protected $fillable = ['title', 'content', 'rate', 'is_visible', 'user_id', 'product_id'];
+
+    public function user ()
+    {
+        return $this->hasOne('App\User', 'id', 'user_id');
+    }
 }
