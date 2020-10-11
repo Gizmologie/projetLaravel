@@ -48,7 +48,14 @@ Route::get('/detailsProduct/{id}', 'AdminController@detailsProduct')->name('deta
 Route::post('admin/{id}/updateProduct', 'AdminController@updateProduct')->name('updateProduct');
 Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('deleteProduct');
 
+
+
 // Route authentification
+Route::get('/login', function () {
+    Auth::login();
+    return redirect()->route('home');
+})->name('login');
+
 Route::get('/logout', function () {
     Auth::logout();
     return redirect()->route('home');

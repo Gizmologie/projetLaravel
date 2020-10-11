@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>@section('title')Site de E-commerce @show</title>
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/profil.css') }}">
+
 
     @section('styles')@show
 </head>

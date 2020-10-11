@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateProductRequest;
@@ -11,6 +12,7 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
@@ -135,13 +137,14 @@ class AdminController extends Controller
 
     public function createProduct ()
     {
-        return view('admin.createProduct');
+        $categories = Category::all();
+        return view('admin.createProduct')->with('categories', $categories);
     }
 
     public function storeProduct (StoreProductRequest $request)
     {
         $params = $request->validated();
-        //$request->image->store('image', 'public');
+        $params['slug'] = Str::slug($params['name'], '-');
         Storage::put('public/images/products', $params['image']);
         $params['image'] = 'images/products/'. $params['image']->hashName();
         if(isset($params['promotion'])) {

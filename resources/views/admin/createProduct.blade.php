@@ -11,10 +11,6 @@
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
-            <label>Slug</label>
-            <input type="text" class="form-control" name="slug" required>
-        </div>
-        <div class="form-group">
             <label>Price</label>
             <input type="number" class="form-control" name="base_price" required>
         </div>
@@ -44,6 +40,12 @@
             <label>Image</label>
             <input type="file" name="image" accept="image/png" required class="form-control">
         </div>
+        <label>Catégorie</label>
+        <select name="category_id" class="custom-select">
+            @foreach($categories as $category)
+                <option value="{{$category->id}}">{{$category->name}}</option>
+            @endforeach
+        </select>
         <button type="submit" class="btn btn-primary">Créer</button>
         @include('components.errors')
     </form>

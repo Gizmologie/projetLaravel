@@ -25,9 +25,9 @@ class StoreProductRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'slug' => 'required',
+            //'slug' => 'required', Créee dabs la méthode
             'base_price' => 'required|numeric',
-            //'promotion' => 'numeric',
+            'promotion' => 'nullable|numeric',
             //'price' => 'required|numeric', calculé dans la méthode
             'stock_quantity' => 'required',
             'functional_description' => 'required',
