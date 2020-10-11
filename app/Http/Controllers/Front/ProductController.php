@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Services\MailerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -55,7 +57,11 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
 
     public function productDetails ($id)
     {
+        $user_id = Auth::id();
         $product = Product::findOrFail($id);
-        return view('pages.product.detailsProduct')->with('product', $product);
+        $comments = Comment::where('product_id', $id);//->where('user_id', $user_id);
+        dump($product);
+        dump($comments);
+        return view('pages.product.detailsProduct')->with('product', $product)->with('comments', $comments);
     }
 }

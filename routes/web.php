@@ -17,7 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
 Route::get('/', [CatalogueController::class, 'list'])->name('home');
+Route::get('/home', [CatalogueController::class, 'list']); // règle le problème de direction lors du login
 Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
