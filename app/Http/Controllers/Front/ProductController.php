@@ -26,6 +26,11 @@ class ProductController extends Controller
         $this->mailerService = $mailerService;
     }
 
+    /**
+     * @param $slug
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug, $id){
         $product = [
             "picture" => "http://placehold.it/700x400",
@@ -45,6 +50,9 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
         return view('pages.products.show', ['product' => $product]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function testMail(){
         $response = $this->mailerService->sendMail([
             'Email' => 'benjamin.robert90@gmail.com',
@@ -55,6 +63,10 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
        die;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function productDetails ($id)
     {
         $user_id = Auth::id(); // si besoin d'avoir ID pour commentaire affichés

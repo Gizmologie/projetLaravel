@@ -26,9 +26,7 @@ class StoreCommentRequest extends FormRequest
         return [ // ajouter le is_visible après
             'title' => 'required',
             'content' => 'required',
-            'rate' => 'required',
-            'user_id' => 'required',
-            'product_id' => 'required',
+            'rate' => 'required|numeric|between:0,5',
         ];
     }
 }

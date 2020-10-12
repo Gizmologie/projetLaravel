@@ -55,19 +55,10 @@
     <div class="row">
         <div class="offset-md-2 col-md-8">
             <br>
-            {{--  Ajouter un commentaire          --}}
-            <form method="post" action="">
-                @csrf
-                <div class="form-group">
-                    <label>Commentaire</label>
-                    <input type="text" class="form-control col-sm-4" name="title" placeholder="titre" required>
-                    <textarea type="text" class="form-control col-sm-10" name="content" placeholder="commentaire" required></textarea>
-                    <button type="submit" class="btn btn-primary">+</button>
-                    @include('components.errors')
-                </div>
-            </form>
 
-
+            @include('pages.product.commentModal')
+            <br>
+            {{-- Comment section --}}
             <section class="comment-list">
                 <!-- First Comment -->
                 @foreach($comments as $comment)
@@ -77,6 +68,15 @@
                             <img class="img-responsive" src="http://www.tangoflooring.ca/wp-content/uploads/2015/07/user-avatar-placeholder.png" />
                             <figcaption class="text-center">{{$comment->user->name}}</figcaption>
                         </figure>
+                        @if($comment->user_id == \Illuminate\Support\Facades\Auth::id())
+                        <form action="{{route('deleteComment', ['id' => $comment->id])}}" method="post">
+                            @csrf
+                            @method('delete')
+                            <button type="submit" class="btn btn-danger mr">
+                                <span class="icon icon-cross"></span>
+                            </button>
+                        </form>
+                        @endif
                     </div>
                     <div class="col-md-10 col-sm-10">
                         <div class="panel panel-default arrow left">
@@ -84,8 +84,16 @@
                                 <header class="text-left">
                                     <div class="comment-user"><i class="fa fa-user"></i> {{$comment->title}}</div>
                                     <time class="comment-date">
-                                        <i class="fa fa-clock-o"></i> {{$comment->available_at}}
+                                        <i class="fa fa-clock-o"></i> {{$comment->created_at->format('d/m/Y à H:m')}}
                                     </time>
+                                    <div class="stars">
+                                        @for($star = 0; $star<$comment->rate; $star++)
+                                            <span class="fa fa-star checked"></span>
+                                        @endfor
+                                        @for($emptyStar = 5; $emptyStar>$comment->rate; $emptyStar--)
+                                            <span class="fa fa-star"></span>
+                                            @endfor
+                                    </div>
                                 </header>
                                 <br>
                                 <div class="comment-post form-control">
@@ -98,6 +106,7 @@
                     <br>
                 @endforeach
             </section>
+            {{-- Fin comment section --}}
         </div>
     </div>
 </div>
