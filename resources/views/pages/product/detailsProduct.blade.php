@@ -10,7 +10,7 @@
                 <div class="preview col-md-6">
 
                     <div class="preview-pic tab-content">
-                        <div class="tab-pane active" id="pic-1"><img src="{{$product->image}}" alt="Image not found" /></div>
+                        <a href="#"><img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}"></a>
                     </div>
                     <ul class="preview-thumbnail nav nav-tabs">
                     </ul>

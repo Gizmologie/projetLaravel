@@ -38013,9 +38013,9 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/benjamin/Documents/Hitema/Cours/laravel.nosync/projetLaravel/resources/js/app.js */"./resources/js/app.js");
-__webpack_require__(/*! /Users/benjamin/Documents/Hitema/Cours/laravel.nosync/projetLaravel/resources/sass/app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! /Users/benjamin/Documents/Hitema/Cours/laravel.nosync/projetLaravel/resources/sass/product-list.scss */"./resources/sass/product-list.scss");
+__webpack_require__(/*! C:\Users\aurel\Desktop\HITEMA M1\Laravel\projetLaravel\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\Users\aurel\Desktop\HITEMA M1\Laravel\projetLaravel\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\Users\aurel\Desktop\HITEMA M1\Laravel\projetLaravel\resources\sass\product-list.scss */"./resources/sass/product-list.scss");
 
 
 /***/ })

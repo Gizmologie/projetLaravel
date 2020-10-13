@@ -53,7 +53,8 @@ Route::get('/detailsProduct/{id}', 'AdminController@detailsProduct')->name('deta
 Route::post('admin/{id}/updateProduct', 'AdminController@updateProduct')->name('updateProduct');
 Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('deleteProduct');
 
-
+// Route panier
+Route::get('/cart', 'CartController@index')->name('cart');
 
 // Route authentification
 Route::get('/login', function () {
