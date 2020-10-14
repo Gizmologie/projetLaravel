@@ -50,15 +50,17 @@ class CartController extends Controller
                 'quantity' => 1
             ]);
             $create = true;
+        }elseif ($quantity === 1){
+            $quantity = $line->quantity + 1;
         }
-
 
         $line->update([
             'quantity' => $quantity
         ]);
 
         return new JsonResponse([
-            'message' => 'Produit ' . ($create ? 'ajouté au panier' : 'mit à jour dans le panier')
+            'message' => 'Produit ' . ($create ? 'ajouté au panier' : 'mit à jour dans le panier'),
+            'quantity' => $quantity
         ], Response::HTTP_OK);
 
     }

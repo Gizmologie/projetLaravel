@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Cart;
+use App\CartLine;
 use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Product;
@@ -47,8 +49,20 @@ class ProductController extends Controller
     public function productDetails ($id)
     {
         $user_id = Auth::id(); // si besoin d'avoir ID pour commentaire affichés
+
         $product = Product::findOrFail($id);
         $comments = Comment::where('product_id', $id)->get();
-        return view('pages.product.detailsProduct')->with('product', $product)->with('comments', $comments);
+        $cart = Cart::where('user_id', '=', $user_id)->first();
+        if ($cart){
+            $line = CartLine::where('cart_id', '=',$cart->id)->where('product_id', '=', $product->id)->first();
+        }else{
+            $line = null;
+        }
+
+        return view('pages.product.detailsProduct')
+            ->with('product', $product)
+            ->with('comments', $comments)
+            ->with('total', $line ? $line->quantity : null)
+            ;
     }
 }

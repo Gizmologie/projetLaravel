@@ -24,7 +24,7 @@ class UpdatePasswordRequest extends FormRequest
     public function rules()
     {
         return [
-            'current_password' => 'required|min:5',
+            'current_password' => 'required',
             'new_password' => 'required|min:5|same:new_password',
             'new_password_check' => 'required|min:5|same:new_password',
         ];

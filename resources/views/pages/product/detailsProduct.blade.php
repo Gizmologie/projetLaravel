@@ -43,7 +43,12 @@
                         <p><strong>Stock :</strong> {{$product->stock_quantity}}</p>
                     @endif
                     <div class="action">
-                        <button class="add-to-cart btn btn-warning js-add-to-cart" data-product="{{ $product->id }}" type="button">Ajouter au panier</button>
+                        <button class="add-to-cart btn btn-warning js-add-to-cart" data-product="{{ $product->id }}" type="button">
+                            Ajouter au panier
+                            @if($total)
+                                ({{ $total }} actuellement)
+                            @endif
+                        </button>
                     </div>
                 </div>
             </div>

@@ -1,4 +1,4 @@
-@extends('pages.profil.base')
+@extends('layouts.base')
 
 @section('content')
 

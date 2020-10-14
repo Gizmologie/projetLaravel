@@ -5,6 +5,7 @@ $('.js-add-to-cart').on('click', (e) => {
 
     $.get('/cart/addLine', {'product_id' : product}).done((response) => {
         document.dispatchEvent(new Event('loadCart'))
+        $(target).html('Ajouter au panier (' + response.quantity + ' actuellement)')
     }).fail((response) => {
         console.log(response);
     })

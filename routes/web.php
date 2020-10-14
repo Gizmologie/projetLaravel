@@ -19,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CatalogueController::class, 'list'])->name('home');
+Route::get('/home', function(){
+    return redirect()->route('home');
+});
 Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
