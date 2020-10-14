@@ -37,8 +37,9 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('cart')}}">
-                        Panier
+                    <a href="{{route('cart')}}" class="notification nav-link">
+                        <span><i class="fas fa-lg fa-shopping-cart"></i></span>
+                        <span class="badge d-none js-cart-total">0</span>
                     </a>
                 </li>
                 <li class="nav-item">

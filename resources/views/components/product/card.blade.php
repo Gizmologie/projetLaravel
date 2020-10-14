@@ -1,6 +1,6 @@
 @if($product)
     <div class="card">
-        <a href="#"><img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}"></a>
+        <a href="#"><img class="card-img-top" src="{{ $product->getImage() }}" alt="{{ $product->name }}"></a>
         <div class="card-body">
             <h4 class="card-title">
                 <a href="{{route('productDetails', ['id' => $product->id])}}">{{ $product->name }}</a>

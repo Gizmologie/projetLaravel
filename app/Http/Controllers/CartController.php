@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Cart;
+use App\CartLine;
 use App\Product;
 use App\User;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class CartController extends Controller
@@ -28,10 +32,49 @@ class CartController extends Controller
             throw new NotFoundResourceException("Ce produit n'existe pas");
         }
 
+        $cart = Cart::where('user_id','=', $user->id)->first();
+
+        if (!$cart){
+            $cart = Cart::create([
+                'user_id' => $user->id
+            ]);
+        }
+
+        $line = CartLine::where('cart_id', '=', $cart->id)->where('product_id', '=', $product->id)->first();
+
+        $create = false;
+        if (!$line){
+            $line = CartLine::create([
+                'cart_id' => $cart->id,
+                'product_id' => $product->id,
+                'quantity' => 1
+            ]);
+            $create = true;
+        }
 
 
-        dump($user, $product);
-        die;
+        $line->update([
+            'quantity' => $quantity
+        ]);
+
+        return new JsonResponse([
+            'message' => 'Produit ' . ($create ? 'ajouté au panier' : 'mit à jour dans le panier')
+        ], Response::HTTP_OK);
+
+    }
+
+    public function loadCart(Request $request){
+        $user = $request->user();
+
+        if (!$user) return new JsonResponse(['total' => 0], Response::HTTP_OK);
+
+        $cart = Cart::where('user_id','=', $user->id)->first();
+
+        if (!$cart) return new JsonResponse(['total' => 0], Response::HTTP_OK);
+
+        $lines = CartLine::where('cart_id', '=', $cart->id)->get();
+
+        return new JsonResponse(['total' => $lines->count()], Response::HTTP_OK);
 
     }
 }

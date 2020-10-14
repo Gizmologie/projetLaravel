@@ -13,7 +13,7 @@ class CreateCartLineTable extends Migration
      */
     public function up()
     {
-        Schema::create('carts_line', function (Blueprint $table) {
+        Schema::create('cart_lines', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('product_id');
@@ -27,6 +27,7 @@ class CreateCartLineTable extends Migration
                 ->references('id')
                 ->on('products')
                 ->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -37,6 +38,6 @@ class CreateCartLineTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_line');
+        Schema::dropIfExists('cart_lines');
     }
 }

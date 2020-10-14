@@ -27,5 +27,8 @@ class  Product extends Model
         'available_at',
     ];
 
+    public function getImage(){
+        return '/' . $this->image;
+    }
 
 }

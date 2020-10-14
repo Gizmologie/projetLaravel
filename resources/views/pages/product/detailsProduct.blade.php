@@ -1,4 +1,4 @@
-@extends('pages.product.base')
+@extends('layouts.base')
 
 @section('content')
 
@@ -10,7 +10,7 @@
                 <div class="preview col-md-6">
 
                     <div class="preview-pic tab-content">
-                        <a href="#"><img class="card-img-top" src="{{ $product->image }}" alt="{{ $product->name }}"></a>
+                        <a href="#"><img class="card-img-top" src="{{ $product->getImage() }}" alt="{{ $product->name }}"></a>
                     </div>
                     <ul class="preview-thumbnail nav nav-tabs">
                     </ul>
@@ -43,7 +43,7 @@
                         <p><strong>Stock :</strong> {{$product->stock_quantity}}</p>
                     @endif
                     <div class="action">
-                        <button class="add-to-cart btn btn-warning" type="button">Ajouter au panier</button>
+                        <button class="add-to-cart btn btn-warning js-add-to-cart" data-product="{{ $product->id }}" type="button">Ajouter au panier</button>
                     </div>
                 </div>
             </div>
@@ -112,3 +112,6 @@
 </div>
 @endsection
 
+@section('javascript')
+    <script type="text/javascript" src="{{ asset('js/cart_add.js') }}"></script>
+@endsection

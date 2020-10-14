@@ -53,6 +53,7 @@ Route::post('admin/{id}/updateProduct', 'AdminController@updateProduct')->name('
 Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('deleteProduct');
 
 Route::get('/cart/addLine', [CartController::class, 'addLine']);
+Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
 
 // Route panier
 Route::get('/cart', 'CartController@index')->name('cart');
