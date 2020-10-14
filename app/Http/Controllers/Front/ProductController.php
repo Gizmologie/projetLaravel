@@ -44,7 +44,8 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
     }
 
     public function testMail(){
-        $response = $this->mailerService->sendMail([
+        $response = $this->mailerService->sendMail(
+            [
             'Email' => 'benjamin.robert90@gmail.com',
             'Name' => 'Benjamin Robert'
         ], 'Test de mail', 'mails.test', ['param' => 'Coucou c\'est moi']);

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\Front\CatalogueController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController;
@@ -48,6 +49,7 @@ Route::get('/detailsProduct/{id}', 'AdminController@detailsProduct')->name('deta
 Route::post('admin/{id}/updateProduct', 'AdminController@updateProduct')->name('updateProduct');
 Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('deleteProduct');
 
+Route::get('/cart/addLine', [CartController::class, 'addLine']);
 
 
 // Route authentification

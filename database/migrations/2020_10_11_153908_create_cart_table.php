@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddCartToProductLine extends Migration
+class CreateCartTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class AddCartToProductLine extends Migration
      */
     public function up()
     {
-        Schema::table('product_lines', function (Blueprint $table) {
-            $table->unsignedBigInteger('cart_id')->nullable();
+        Schema::create('carts', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id');
 
-            $table->foreign('cart_id')
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('carts')
-                ->onDelete('CASCADE');
+                ->on('users')
+                ->cascadeOnDelete();
+            $table->timestamps();
         });
     }
 
@@ -30,8 +32,6 @@ class AddCartToProductLine extends Migration
      */
     public function down()
     {
-        Schema::table('product_lines', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('cart');
     }
 }
