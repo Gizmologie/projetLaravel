@@ -145,8 +145,8 @@ class AdminController extends Controller
     {
         $params = $request->validated();
         $params['slug'] = Str::slug($params['name'], '-');
-        Storage::put('public/images/products', $params['image']);
-        $params['image'] = 'images/products/'. $params['image']->hashName();
+        Storage::put('public/products', $params['image']);
+        $params['image'] = 'products/'. $params['image']->hashName();
         if(isset($params['promotion'])) {
             $params['price'] = $params['base_price'] - ($params['base_price'] * ($params['promotion']/100));
         } else {

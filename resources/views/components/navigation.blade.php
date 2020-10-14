@@ -9,6 +9,9 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
+                <a class="nav-link" href="{{route('home')}}">Liste</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="">Promotion</a>
             </li>
             <li class="nav-item">
@@ -26,13 +29,16 @@
     </div>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">
-
-
             @if(\Illuminate\Support\Facades\Auth::check())
 
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('profil',  ['id' => \Illuminate\Support\Facades\Auth::user()->id])}}">
                         {{ \Illuminate\Support\Facades\Auth::user()->name}}
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{route('cart')}}">
+                        Panier
                     </a>
                 </li>
                 <li class="nav-item">

@@ -25,6 +25,9 @@ Route::get('/testMail', [ProductController::class, 'testMail']);
 // Route produit
 Route::get('/productDetails/{id}', [ProductController::class, 'productDetails'])->name('productDetails');
 
+// Route Commentaire
+Route::post('storeComment/{product_id}', 'CommentController@storeComment')->name('storeComment');
+Route::delete('deleteComment/{id}', 'CommentController@removeComment')->name('deleteComment');
 
 // Route utilisateur
 Route::get('/profil/{id}', 'UserController@profil')->name('profil');
@@ -51,6 +54,8 @@ Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('del
 
 Route::get('/cart/addLine', [CartController::class, 'addLine']);
 
+// Route panier
+Route::get('/cart', 'CartController@index')->name('cart');
 
 // Route authentification
 Route::get('/login', function () {

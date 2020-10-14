@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Front;
 
+use App\Comment;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Services\MailerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -24,6 +26,11 @@ class ProductController extends Controller
         $this->mailerService = $mailerService;
     }
 
+    /**
+     * @param $slug
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function show($slug, $id){
         $product = [
             "picture" => "http://placehold.it/700x400",
@@ -43,6 +50,9 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
         return view('pages.products.show', ['product' => $product]);
     }
 
+    /**
+     * @throws \Throwable
+     */
     public function testMail(){
         $response = $this->mailerService->sendMail(
             [
@@ -54,9 +64,15 @@ Duo Reges: constructio interrete. Aliter enim explicari, quod quaeritur, non pot
        die;
     }
 
+    /**
+     * @param $id
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function productDetails ($id)
     {
+        $user_id = Auth::id(); // si besoin d'avoir ID pour commentaire affichés
         $product = Product::findOrFail($id);
-        return view('pages.product.detailsProduct')->with('product', $product);
+        $comments = Comment::where('product_id', $id)->get();
+        return view('pages.product.detailsProduct')->with('product', $product)->with('comments', $comments);
     }
 }
