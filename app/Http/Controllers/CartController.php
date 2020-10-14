@@ -15,6 +15,11 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class CartController extends Controller
 {
+    public function index()
+    {
+        return view('pages.cart.index');
+    }
+
     public function addLine(Request $request){
 
         $product_id = $request->request->get('product_id', null);

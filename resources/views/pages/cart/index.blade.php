@@ -1,4 +1,4 @@
-@extends('pages.cart.base')
+@extends('layouts.base')
 
 @section('content')
     <div class="col-sm-4 order-sm-2 mt-0">
