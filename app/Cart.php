@@ -18,5 +18,23 @@ class Cart extends Model
         'user_id'
     ];
 
+    public function lines(){
+        return $this->hasMany(CartLine::class);
+    }
 
+    public function getNbObjects(){
+        $total = 0;
+        foreach ($this->lines()->get() as $line) {
+            $total += $line->quantity;
+        }
+        return $total;
+    }
+
+    public function getTotal(){
+        $total = 0;
+        foreach ($this->lines()->get() as $line) {
+            $total += $line->quantity * $line->product->price;
+        }
+        return $total;
+    }
 }

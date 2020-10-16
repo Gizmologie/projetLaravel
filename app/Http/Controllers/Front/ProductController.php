@@ -11,6 +11,7 @@ use App\Services\MailerService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class ProductController extends Controller
 {
@@ -46,12 +47,17 @@ class ProductController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function productDetails ($id)
+    public function productDetails ($category, $slug)
     {
         $user_id = Auth::id(); // si besoin d'avoir ID pour commentaire affichés
 
-        $product = Product::findOrFail($id);
-        $comments = Comment::where('product_id', $id)->get();
+        $product = Product::where('slug', '=',$slug)->first();
+
+        if (!$product){
+            throw new NotFoundResourceException('Ce produit n\'existe pas.');
+        }
+        $comments = Comment::where('product_id', $product->id)->get();
+
         $cart = Cart::where('user_id', '=', $user_id)->first();
         if ($cart){
             $line = CartLine::where('cart_id', '=',$cart->id)->where('product_id', '=', $product->id)->first();

@@ -31,4 +31,8 @@ class  Product extends Model
         return '/' . $this->image;
     }
 
+    public function getCategory(){
+        return $this->hasOne(Category::class, 'id', 'category_id')->first();
+    }
+
 }

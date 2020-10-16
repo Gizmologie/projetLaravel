@@ -17,7 +17,9 @@ class CartController extends Controller
 {
     public function index()
     {
-        return view('pages.cart.index');
+        $cart = Cart::where('user_id', '=', Auth::id())->first();
+
+        return view('pages.cart.index')->with('cart', $cart);
     }
 
     public function addLine(Request $request){
@@ -25,12 +27,12 @@ class CartController extends Controller
         $product_id = $request->request->get('product_id', null);
         $product = Product::where('id', '=', $product_id)->first();
 
-        $quantity = $request->request->get('quantity', 1);
+        $quantity = $request->request->get('quantity', null);
 
         $user = $request->user();
 
         if (!$user){
-            throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut ajouter articles");
+            throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut ajouter des articles");
         }
 
         if (!$product){
@@ -47,27 +49,85 @@ class CartController extends Controller
 
         $line = CartLine::where('cart_id', '=', $cart->id)->where('product_id', '=', $product->id)->first();
 
+
         $create = false;
         if (!$line){
             $line = CartLine::create([
                 'cart_id' => $cart->id,
                 'product_id' => $product->id,
-                'quantity' => 1
+                'quantity' => 0
             ]);
             $create = true;
-        }elseif ($quantity === 1){
-            $quantity = $line->quantity + 1;
         }
 
+
+        if (!$quantity){
+            $quantity = $line->quantity + 1;
+            $isOutOfStock = ($product->stock_quantity - (1)) < 0;
+        }else{
+            $isOutOfStock = $line->quantity > $quantity ? false : $product->stock_quantity - ($quantity - $line->quantity ) < 0;
+        }
+
+        if ($isOutOfStock){
+            return new JsonResponse([
+                'message' => 'Le stock n\'est pas suffisant',
+                'quantity' => $line->quantity,
+                'success' => false
+            ], Response::HTTP_OK);
+        }
+
+
+
+        $product->update([
+            'stock_quantity' => $product->stock_quantity - ($quantity - $line->quantity)
+        ]);
+
         $line->update([
-            'quantity' => $quantity
+            'quantity' => $quantity ? $quantity : ($quantity)
         ]);
 
         return new JsonResponse([
             'message' => 'Produit ' . ($create ? 'ajouté au panier' : 'mit à jour dans le panier'),
-            'quantity' => $quantity
+            'quantity' => $quantity,
+            'nbObjects' => $cart->getNbObjects(),
+            'totalPrice' => $cart->getTotal(),
+            'productStock' => $product->stock_quantity,
+            'success' => true
         ], Response::HTTP_OK);
 
+    }
+
+
+    public function deleteLine(Request $request){
+        $product_id = $request->request->get('product_id', null);
+        $user = $request->user();
+
+        if (!$user){
+            throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut supprimer des articles");
+        }
+
+        $cart = Cart::where('user_id','=', $user->id)->first();
+        $line = CartLine::where('cart_id', '=', $cart->id)->where('product_id', '=', $product_id)->first();
+
+        if (!$line->id){
+            return new JsonResponse([
+                'message' => 'Impossible de supprimer cette ligne',
+                'success' => false
+            ], Response::HTTP_FORBIDDEN);
+        }
+
+        $product = Product::where('id', '=', $product_id)->first();
+        $product->update([
+            'stock_quantity' => $product->stock_quantity + $line->quantity
+        ]);
+        $line->delete();
+
+        return new JsonResponse([
+            'message' => 'Ligne supprimée',
+            'nbObjects' => $cart->getNbObjects(),
+            'totalPrice' => $cart->getTotal(),
+            'success' => true
+        ], Response::HTTP_OK);
     }
 
     public function loadCart(Request $request){
@@ -79,9 +139,7 @@ class CartController extends Controller
 
         if (!$cart) return new JsonResponse(['total' => 0], Response::HTTP_OK);
 
-        $lines = CartLine::where('cart_id', '=', $cart->id)->get();
-
-        return new JsonResponse(['total' => $lines->count()], Response::HTTP_OK);
-
+        return new JsonResponse(['total' => $cart->getNbObjects()], Response::HTTP_OK);
     }
+
 }

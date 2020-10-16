@@ -25,3 +25,13 @@
     background: red;
     color: white;
 }
+
+.card-product{
+    border-radius: 0 !important;
+}
+
+.cart-img-container{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}

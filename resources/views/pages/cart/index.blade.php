@@ -1,76 +1,66 @@
 @extends('layouts.base')
 
 @section('content')
-    <div class="col-sm-4 order-sm-2 mt-0">
-        <div class="card">
-            <div class="offset-sm-4 col-sm-4">
-                <span><b>PANIER</b></span>
-            </div>
-            <div class="col-sm-10 my-2">
-                Total :<tr>100€</tr>
-            </div>
-            <br>
-        </div>
-    </div>
-{{--  début de la carte (mettre le foreach avant)  --}}
-    <div class="col-sm-7 my-1">
-        <div class="card">
-            <div class="card-body p-1">
-                <div class="row">
-                    <div class="offset-sm-3 col-sm-3 d-flex order-sm-3">
-
-                        <div class="form-group">
-                            <input type="number" value="1" class="form-control">
-                         </div>
-
-                        <div class="ml-auto">
-                            <a type="submit" href="" class="btn btn-danger btn-sm">
-                                <span class="icon icon-cross"></span>
-                            </a>
+    <div class="row mt-5 pt-5">
+    @if($cart && $cart->getNbObjects() > 0)
+        <div class="col-lg-7 my-1 order-1 order-md-0">
+            <div class="col-12">
+                @foreach($cart->lines as $line)
+                    <div class="card card-product shadow mb-3" id="product-line-{{ $line->product->id }}">
+                        <div class="card-body p-1">
+                            <div class="row p-2">
+                                <div class="col-3 cart-img-container">
+                                    <img class="img-fluid my-auto" src="{{ asset($line->product->image) }}" alt="{{ $line->product->name }}">
+                                </div>
+                                <div class="col-5">
+                                    <h4 class="card-title ">{{ $line->product->name }}</h4>
+                                    <p>{{ $line->product->price }} €</p>
+                                </div>
+                                <div class="col-4">
+                                    <div class="row">
+                                        <div class="offset-2 col-5 pr-0">
+                                            <input type="number" value="{{ $line->quantity }}" class="js-update-product-line form-control" data-product="{{ $line->product->id }}">
+                                        </div>
+                                        <div class="col-4 pl-2 pt-1">
+                                            <a type="submit" class="js-delete-product-line btn btn-danger btn-sm" data-product="{{ $line->product->id }}">
+                                                <span class="fas fa-times js-delete-product-line" data-product="{{ $line->product->id }}"></span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-sm-3">
-                        <a href="#"><img class="card-img-top" src="" alt="Image not found"></a>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="col-lg-4 order-sm-2 mt-0 order-0 order-md-1">
+            <div class="card card-product">
+                <div class="text-center mt-3">
+                    <h4>Votre panier</h4>
+                </div>
+                <div class="row p-2">
+                    <div class="col-8 text-left">
+                        <strong>
+                            Total :
+                            <span id="cart-total-objects">{{ $cart->getNbObjects() }}</span>
+                            article(s)
+                        </strong>
                     </div>
-                    <div class="col-sm-3">
-                        <p class="card-title">Nom du produit</p>
-                        <p>Prix</p>
+                    <div class="col-4 text-right" >
+                        <span id="cart-total-price">{{ $cart->getTotal() }}</span> €
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-{{--  Fin de la carte (endforeach apres)  --}}
-
-{{--Carte 2 --}}
-    <div class="col-sm-7 my-1">
-        <div class="card">
-            <div class="card-body p-1">
-                <div class="row">
-                    <div class="offset-sm-3 col-sm-3 d-flex order-sm-3">
-
-                        <div class="form-group">
-                            <input type="number" value="1" class="form-control">
-                        </div>
-
-                        <div class="ml-auto">
-                            <a type="submit" href="" class="btn btn-danger btn-sm">
-                                <span class="icon icon-cross"></span>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="col-sm-3">
-                        <a href="#"><img class="card-img-top" src="" alt="Image not found"></a>
-                    </div>
-                    <div class="col-sm-3">
-                        <p class="card-title">Nom du produit</p>
-                        <p>Prix</p>
-                    </div>
-                </div>
-            </div>
+    @else
+        <div class="col-12">
+            <h3>Votre panier est vide</h3>
         </div>
+    @endif
     </div>
-
-{{--fin de carte 2--}}
-
+@endsection
+@section('javascript')
+    <script type="text/javascript" src="{{ asset('js/cart_update.js') }}"></script>
 @endsection

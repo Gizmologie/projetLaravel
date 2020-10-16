@@ -118,5 +118,5 @@
 @endsection
 
 @section('javascript')
-    <script type="text/javascript" src="{{ asset('js/cart_add.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/cart_update.js') }}"></script>
 @endsection

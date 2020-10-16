@@ -26,7 +26,7 @@ Route::get('/recherche', [CatalogueController::class, 'list'])->name('search');
 Route::get('/testMail', [ProductController::class, 'testMail']);
 
 // Route produit
-Route::get('/productDetails/{id}', [ProductController::class, 'productDetails'])->name('productDetails');
+Route::get('/produit/{category}/{slug}', [ProductController::class, 'productDetails'])->name('productDetails');
 
 // Route Commentaire
 Route::post('storeComment/{product_id}', 'CommentController@storeComment')->name('storeComment');
@@ -55,7 +55,8 @@ Route::get('/detailsProduct/{id}', 'AdminController@detailsProduct')->name('deta
 Route::post('admin/{id}/updateProduct', 'AdminController@updateProduct')->name('updateProduct');
 Route::delete('/deleteProduct/{id}', 'AdminController@removeProduct')->name('deleteProduct');
 
-Route::get('/cart/addLine', [CartController::class, 'addLine']);
+Route::get('/cart/deleteLine', [CartController::class, 'deleteLine']);
+Route::get('/cart/updateLine', [CartController::class, 'addLine']);
 Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
 
 // Route panier
