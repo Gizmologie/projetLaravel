@@ -28,7 +28,7 @@
                 <input type="text" class="form-control" name="roles" required>
             </div>
             <button type="submit" class="btn btn-primary">Créer</button>
-            @include('components.errors')
+            @include('components.form.errors')
         </form>
     </div>
 @endsection

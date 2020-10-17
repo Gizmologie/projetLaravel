@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Front;
 use App\Cart;
 use App\CartLine;
 use App\Comment;
+use App\Enum\CartStateEnum;
 use App\Http\Controllers\Controller;
 use App\Product;
 use App\Services\MailerService;
@@ -58,7 +59,7 @@ class ProductController extends Controller
         }
         $comments = Comment::where('product_id', $product->id)->get();
 
-        $cart = Cart::where('user_id', '=', $user_id)->first();
+        $cart = Cart::where('user_id','=', $user_id)->where('state', '=', CartStateEnum::$CREATED)->first();
         if ($cart){
             $line = CartLine::where('cart_id', '=',$cart->id)->where('product_id', '=', $product->id)->first();
         }else{

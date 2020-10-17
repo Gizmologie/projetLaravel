@@ -23,7 +23,7 @@
             <input type="text" class="form-control" name="roles" value="{{$user->roles}}">
         </div>
         <button type="submit" class="btn btn-primary">Modifier</button>
-        @include('components.errors')
+        @include('components.form.errors')
     </form>
 
 @endsection
