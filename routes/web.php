@@ -59,6 +59,12 @@ Route::get('/cart/deleteLine', [CartController::class, 'deleteLine']);
 Route::get('/cart/updateLine', [CartController::class, 'addLine']);
 Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
 
+
+// Route authentification
+Route::post('/mailResetPassword', 'AdminController@mailResetPassword')->name('mailResetPassword');
+Route::post('/resetPassword', 'AdminController@resetPassword')->name('resetPassword');
+
+
 // Route panier
 Route::get('/cart', 'CartController@index')->name('cart');
 

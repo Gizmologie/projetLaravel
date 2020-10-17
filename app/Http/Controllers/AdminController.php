@@ -8,14 +8,30 @@ use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateProductRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\Product;
+use App\Services\MailerService;
 use App\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class AdminController extends Controller
 {
+    /**
+     * @var MailerService
+     */
+    private $mailerService;
+
+    /**
+     * ProductController constructor.
+     * @param MailerService $mailerService
+     */
+    public function __construct(MailerService $mailerService)
+    {
+        $this->mailerService = $mailerService;
+    }
+
     /**
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -134,13 +150,19 @@ class AdminController extends Controller
         return redirect()->route('adminUser');
     }
 
-
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function createProduct ()
     {
         $categories = Category::all();
         return view('admin.createProduct')->with('categories', $categories);
     }
 
+    /**
+     * @param StoreProductRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function storeProduct (StoreProductRequest $request)
     {
         $params = $request->validated();
@@ -154,5 +176,59 @@ class AdminController extends Controller
         }
         Product::create($params);
         return redirect()->route('adminProduct');
+    }
+
+    /**
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function forgotPassword()
+    {
+        return view('auth.password.reset');
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function mailResetPassword(Request $request)
+    {
+        $email = $request->all()['email'];
+        $users = User::all();
+        $code = random_int(100000, 999999);
+
+        foreach ($users as $user)
+        {
+            if ($user['email'] == $email)
+            {
+                $response = $this->mailerService->sendMail(
+                    [
+                        'Email' => $email,
+                        'Name' => 'e_commerce'
+                    ], 'Reset Password', 'mails.resetPassword', ['user' => $user, 'code' =>$code]);
+
+                //dump($response->success(), $response->getData());
+            }
+            else
+            {
+                dd('email n\'existe pas');
+            }
+        }
+        return view('pages.mail.codeVerification')
+            ->with('email', $email)
+            ->with('code', $code);
+        die;
+    }
+
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function resetPassword(Request $request)
+    {
+        $params = $request->all();
+        $params['password'] = Hash::make($params['password']);
+        $user = User::findOrFail(Auth::id());
+        $user->update($params);
+        return redirect()->route('home');
     }
 }
