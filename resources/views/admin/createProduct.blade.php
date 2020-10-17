@@ -47,7 +47,7 @@
             @endforeach
         </select>
         <button type="submit" class="btn btn-primary">Créer</button>
-        @include('components.errors')
+        @include('components.form.errors')
     </form>
 
 @endsection

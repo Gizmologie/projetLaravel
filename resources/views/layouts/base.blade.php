@@ -5,8 +5,8 @@
     <title>@section('title')Site de E-commerce @show</title>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-
-@section('styles')@show
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @section('styles')@show
 </head>
 <body>
     @include('components.navigation')

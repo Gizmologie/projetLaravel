@@ -15,11 +15,15 @@ class Cart extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id'
+        'user_id', 'state'
     ];
 
     public function lines(){
         return $this->hasMany(CartLine::class);
+    }
+
+    public function user(){
+        return $this->hasOne(User::class, 'id', 'user_id')->first();
     }
 
     public function getNbObjects(){

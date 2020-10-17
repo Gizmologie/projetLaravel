@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\CartLine;
+use App\Enum\CartStateEnum;
 use App\Product;
 use App\User;
 use Illuminate\Http\JsonResponse;
@@ -15,15 +16,21 @@ use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class CartController extends Controller
 {
-    public function index()
+    /**
+     * @var Request
+     */
+    private $request;
+
+    public function index(Request $request)
     {
-        $cart = Cart::where('user_id', '=', Auth::id())->first();
+        $this->request = $request;
+
+        $cart = $this->getCart();
 
         return view('pages.cart.index')->with('cart', $cart);
     }
 
     public function addLine(Request $request){
-
         $product_id = $request->request->get('product_id', null);
         $product = Product::where('id', '=', $product_id)->first();
 
@@ -39,11 +46,14 @@ class CartController extends Controller
             throw new NotFoundResourceException("Ce produit n'existe pas");
         }
 
-        $cart = Cart::where('user_id','=', $user->id)->first();
+        $this->request = $request;
+
+        $cart = $this->getCart();
 
         if (!$cart){
             $cart = Cart::create([
-                'user_id' => $user->id
+                'user_id' => $user->id,
+                'state' => CartStateEnum::$CREATED
             ]);
         }
 
@@ -97,16 +107,17 @@ class CartController extends Controller
 
     }
 
-
     public function deleteLine(Request $request){
         $product_id = $request->request->get('product_id', null);
-        $user = $request->user();
 
-        if (!$user){
+        $this->request = $request;
+
+        $cart = $this->getCart();
+
+        if (!$cart){
             throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut supprimer des articles");
         }
 
-        $cart = Cart::where('user_id','=', $user->id)->first();
         $line = CartLine::where('cart_id', '=', $cart->id)->where('product_id', '=', $product_id)->first();
 
         if (!$line->id){
@@ -131,15 +142,23 @@ class CartController extends Controller
     }
 
     public function loadCart(Request $request){
-        $user = $request->user();
+        $this->request = $request;
 
-        if (!$user) return new JsonResponse(['total' => 0], Response::HTTP_OK);
-
-        $cart = Cart::where('user_id','=', $user->id)->first();
+        $cart = $this->getCart();
 
         if (!$cart) return new JsonResponse(['total' => 0], Response::HTTP_OK);
 
         return new JsonResponse(['total' => $cart->getNbObjects()], Response::HTTP_OK);
+    }
+
+    private function getCart(){
+        $user = $this->request->user();
+
+        if (!$user){
+            throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut ajouter des articles");
+        }
+
+        return Cart::where('user_id','=', $user->id)->where('state', '=', CartStateEnum::$CREATED)->first();
     }
 
 }

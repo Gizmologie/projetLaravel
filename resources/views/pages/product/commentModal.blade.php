@@ -27,7 +27,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
                     <button type="submit" class="btn btn-primary">Commenter</button>
-                    @include('components.errors')
+                    @include('components.form.errors')
                 </div>
             </div>
         </div>
