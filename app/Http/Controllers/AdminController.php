@@ -195,24 +195,18 @@ class AdminController extends Controller
         $email = $request->all()['email'];
         $users = User::all();
         $code = random_int(100000, 999999);
-
         foreach ($users as $user)
         {
-            if ($user['email'] == $email)
+            if ($user['email'] === $email)
             {
                 $response = $this->mailerService->sendMail(
                     [
                         'Email' => $email,
                         'Name' => 'e_commerce'
                     ], 'Reset Password', 'mails.resetPassword', ['user' => $user, 'code' =>$code]);
-
-                //dump($response->success(), $response->getData());
-            }
-            else
-            {
-                dd('email n\'existe pas');
             }
         }
+
         return view('pages.mail.codeVerification')
             ->with('email', $email)
             ->with('code', $code);

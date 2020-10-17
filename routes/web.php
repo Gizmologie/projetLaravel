@@ -63,7 +63,7 @@ Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
 
 // Route authentification
 Route::post('/mailResetPassword', 'AdminController@mailResetPassword')->name('mailResetPassword');
-Route::post('/resetPassword', 'AdminController@resetPassword')->name('resetPassword');
+Route::post('/resetPassword', 'AdminController@resetPassword')->name('resetPassword'); 
 
 
 // Route panier
