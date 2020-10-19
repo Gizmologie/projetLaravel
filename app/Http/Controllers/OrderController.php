@@ -99,7 +99,7 @@ class OrderController extends Controller
                 'state' => OrderStateEnum::$ACCEPTED
             ]);
        }else{
-           $order->delete();
+           return redirect()->route('orderStep2');
        }
 
 
