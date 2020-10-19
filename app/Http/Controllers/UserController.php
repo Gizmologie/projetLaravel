@@ -14,10 +14,11 @@ class UserController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function profil ($id)
+    public function profil ()
     {
-        $user = User::findOrFail($id);
-        return view('pages.profil.index')->with('user', $user);
+        //$user = User::findOrFail($id);
+//        return view('pages.profil.index')->with('user', $user);
+        return view('pages.profil.index');
     }
 
     /**

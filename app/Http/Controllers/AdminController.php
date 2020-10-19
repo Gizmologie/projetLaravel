@@ -55,11 +55,11 @@ class AdminController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getDetailsUser($id)
+/*    public function getDetailsUser($id)
     {
         $users = User::where('id', $id)->firstOrFail();
         return view('detailsUser')->with('users', $users);
-    }
+    }*/
 
     /**
      * @param $id
@@ -145,6 +145,7 @@ class AdminController extends Controller
     public function storeUser (StoreUserRequest $request)
     {
         $params = $request->validated();
+        $params['is_active'] = 0;
         $params['password'] = Hash::make($params['password']);
         User::create($params);
         return redirect()->route('adminUser');

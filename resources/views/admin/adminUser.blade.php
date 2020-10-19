@@ -29,6 +29,7 @@
                                 <i class="fas fa-pencil-alt"></i>
                             </a>
 
+                            @if($user->id != \Illuminate\Support\Facades\Auth::id())
                             <form action="{{route('deleteUser', ['id' => $user->id])}}" method="post">
                                 @csrf
                                 @method('delete')
@@ -36,6 +37,7 @@
                                     <i class="fas fa-times"></i>
                                 </button>
                             </form>
+                            @endif
                         </td>
                     </tr>
                 @endforeach

@@ -20,10 +20,6 @@
                 <input type="text" class="form-control" name="email"  required>
             </div>
             <div class="form-group">
-                <label>is_active (0 = No & 1 = Yes)</label>
-                <input type="text" class="form-control" name="is_active"  required>
-            </div>
-            <div class="form-group">
                 <label>roles</label>
                 <input type="text" class="form-control" name="roles" required>
             </div>

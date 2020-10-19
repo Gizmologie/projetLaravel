@@ -1,6 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
+<input type="hidden" value="{{$user = \Illuminate\Support\Facades\Auth::user()}}">
+
 
 <div class="row gutters-sm mt-5">
     <div class="col-md-4 mb-3">
