@@ -40,21 +40,25 @@ Route::get('/updatePassword/{id}', 'UserController@updatePassword')->name('updat
 Route::post('changePassword/{id}', 'UserController@changePassword')->name('passwordChange');
 
 // Route administration
-// Administation User
-Route::get('/admin/user', 'AdminController@indexUser')->name('adminUser');
-Route::get('/admin/user/details/{id}', 'AdminController@detailsUser')->name('detailsUser'); // route vers page
-Route::get('/admin/user/create', 'AdminController@createUser')->name('createUser');
-Route::post('/admin/user/store', 'AdminController@storeUser')->name('storeUser');
-Route::post('/admin/user/update/{id}', 'AdminController@updateUser')->name('updateUser');
-Route::delete('/admin/user/delete/{id}', 'AdminController@removeUser')->name('deleteUser');
 
-// Administration Product
-Route::get('/admin/product', 'AdminController@indexProduct')->name('adminProduct');
-Route::get('/admin/product/create', 'AdminController@createProduct')->name('createProduct');
-Route::post('/admin/product/store', 'AdminController@storeProduct')->name('storeProduct');
-Route::get('/admin/product/details/{id}', 'AdminController@detailsProduct')->name('detailsProduct');
-Route::post('/admin/product/update/{id}', 'AdminController@updateProduct')->name('updateProduct');
-Route::delete('/admin/product/delete/{id}', 'AdminController@removeProduct')->name('deleteProduct');
+Route::group(['middleware' => ['admin']], function () {
+    // Administation User
+    Route::get('/admin/user', 'AdminController@indexUser')->name('adminUser');
+    Route::get('/admin/user/details/{id}', 'AdminController@detailsUser')->name('detailsUser'); // route vers page
+    Route::get('/admin/user/create', 'AdminController@createUser')->name('createUser');
+    Route::post('/admin/user/store', 'AdminController@storeUser')->name('storeUser');
+    Route::post('/admin/user/update/{id}', 'AdminController@updateUser')->name('updateUser');
+    Route::delete('/admin/user/delete/{id}', 'AdminController@removeUser')->name('deleteUser');
+
+    // Administration Product
+    Route::get('/admin/product', 'AdminController@indexProduct')->name('adminProduct');
+    Route::get('/admin/product/create', 'AdminController@createProduct')->name('createProduct');
+    Route::post('/admin/product/store', 'AdminController@storeProduct')->name('storeProduct');
+    Route::get('/admin/product/details/{id}', 'AdminController@detailsProduct')->name('detailsProduct');
+    Route::post('/admin/product/update/{id}', 'AdminController@updateProduct')->name('updateProduct');
+    Route::delete('/admin/product/delete/{id}', 'AdminController@removeProduct')->name('deleteProduct');
+});
+
 
 Route::get('/cart/deleteLine', [CartController::class, 'deleteLine']);
 Route::get('/cart/updateLine', [CartController::class, 'addLine']);
