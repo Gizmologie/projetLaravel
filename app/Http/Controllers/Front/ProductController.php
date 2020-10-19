@@ -59,7 +59,7 @@ class ProductController extends Controller
         }
         $comments = Comment::where('product_id', $product->id)->get();
 
-        $cart = Cart::where('user_id','=', $user_id)->where('state', '=', CartStateEnum::$CREATED)->first();
+        $cart = Cart::where('user_id','=', $user_id)->first();
         if ($cart){
             $line = CartLine::where('cart_id', '=',$cart->id)->where('product_id', '=', $product->id)->first();
         }else{

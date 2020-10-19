@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Cart;
 use App\CartLine;
-use App\Enum\CartStateEnum;
 use App\Product;
 use App\User;
 use Illuminate\Http\JsonResponse;
@@ -52,8 +51,7 @@ class CartController extends Controller
 
         if (!$cart){
             $cart = Cart::create([
-                'user_id' => $user->id,
-                'state' => CartStateEnum::$CREATED
+                'user_id' => $user->id
             ]);
         }
 
@@ -158,7 +156,7 @@ class CartController extends Controller
             throw new NotFoundResourceException("Pour le moment, seul un utilisateur connecté peut ajouter des articles");
         }
 
-        return Cart::where('user_id','=', $user->id)->where('state', '=', CartStateEnum::$CREATED)->first();
+        return Cart::where('user_id','=', $user->id)->first();
     }
 
 }

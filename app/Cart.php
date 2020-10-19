@@ -15,7 +15,7 @@ class Cart extends Model
      * @var array
      */
     protected $fillable = [
-        'user_id', 'state'
+        'user_id'
     ];
 
     public function lines(){

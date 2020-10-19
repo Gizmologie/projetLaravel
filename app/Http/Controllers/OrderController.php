@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Cart;
-use App\Enum\CartStateEnum;
 use App\Enum\OrderStateEnum;
 use App\Http\Requests\OrderDeliveryInformations;
 use App\Order;
 use App\Services\StripeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpFoundation\RequestStack;
+use Illuminate\Support\Facades\Hash;
 
 class OrderController extends Controller
 {
@@ -89,24 +88,17 @@ class OrderController extends Controller
 
     public function step3(Request $request){
         $this->request = $request;
-        $order = $this->getOrder();
+        $order = Order::where('hash', '=', $request->get('token', -1))->first();
 
         if (!$order instanceof Order){
             return $order;
         }
 
        if ($request->get('state') === 'success'){
-            $order->cart()->update([
-                'state' => CartStateEnum::$ORDERED
-            ]);
             $order->update([
                 'state' => OrderStateEnum::$DELIVERY_IN_PROCESS
             ]);
        }else{
-           $order->cart()->update([
-               'state' => CartStateEnum::$CREATED
-           ]);
-
            $order->delete();
        }
 
@@ -126,9 +118,9 @@ class OrderController extends Controller
         if (!$order instanceof Order){
             return $order;
         }
-        return ['id' => $this->stripeService->payement($order, [
-            'success_url' => route('orderStep3', ['state' => 'success']),
-            'cancel_url' => route('orderStep3', ['state' => 'cancel']),
+        return ['id' => $this->stripeService->checkout($order, [
+            'success_url' => route('orderStep3', ['state' => 'success', 'token' => $order->hash]),
+            'cancel_url' => route('orderStep3', ['state' => 'cancel', 'token' => $order->hash]),
         ])];
     }
 
@@ -142,25 +134,26 @@ class OrderController extends Controller
             return redirect()->route('login');
         }
 
-        $cart = Cart::where('user_id','=', $user->id)->where('state', '!=', CartStateEnum::$ORDERED)->first();
-
-        if (!$cart){
-            return redirect()->route('cart');
-        }
-
         /** @var Order $order */
-        $order = Order::where('cart_id', '=', $cart->id)->first();
+        $order = Order::where('user_id','=', $user->id)->where('state', '!=', OrderStateEnum::$DELIVERY_IN_PROCESS)->first();
 
         if (!$order){
+
+            $cart = Cart::where('user_id', '=', $user->id)->first();
+
+            if (!$cart){
+                return redirect()->route('cart');
+            }
+
             $order = Order::create([
-                'cart_id' => $cart->id,
+                'user_id' => $user->id,
                 'state' => OrderStateEnum::$CREATED,
-                'price' => $cart->getTotal()
+                'lines' => Order::createLines($cart->lines()->get()),
+                'price' => $cart->getTotal(),
+                'hash' => Hash::make(uniqid())
             ]);
 
-            $cart->update([
-                'state' => CartStateEnum::$ORDER_STARTED
-            ]);
+            $cart->delete();
         }
 
         return $order;

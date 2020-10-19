@@ -28,12 +28,14 @@ class CreateOrderTable extends Migration
 
             $table->float('price');
 
-            $table->unsignedBigInteger('cart_id')->nullable();
+            $table->longText('lines')->nullable();
 
-            $table->foreign('cart_id')
+            $table->unsignedBigInteger('user_id');
+
+            $table->foreign('user_id')
                 ->references('id')
-                ->on('carts')
-                ->onDelete('SET NULL');
+                ->on('users')
+                ->cascadeOnDelete();
 
             $table->timestamps();
         });
