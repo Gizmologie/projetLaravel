@@ -30,7 +30,7 @@ class StripeService
         return config('stripe.STRIPE_PUBLIC');
     }
 
-    public function payement(Order $order, array $redirect)
+    public function checkout(Order $order, array $redirect)
     {
         $payment = $this->stripeClient->checkout->sessions->create([
             'payment_method_types' => ['card'],
@@ -46,7 +46,7 @@ class StripeService
                 'quantity'   => 1,
             ]],
             'mode'                 => 'payment',
-            'customer_email' => $order->cart()->first()->user()->email,
+            'customer_email' => $order->user()->email,
             'success_url'          => $redirect['success_url'],
             'cancel_url'           => $redirect['cancel_url'],
         ]);

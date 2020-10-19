@@ -38586,7 +38586,7 @@ window.onload = function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\aurel\Desktop\HITEMA M1\Laravel\projetLaravel\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/benjamin/Documents/Hitema/Cours/laravel.nosync/projetLaravel/resources/js/app.js */"./resources/js/app.js");
 
 
 /***/ })

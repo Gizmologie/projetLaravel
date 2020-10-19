@@ -42,12 +42,12 @@
                                 <div class="row">
                                     <div class="col-8 text-left">
                                         <strong>
-                                            <span id="cart-total-objects">{{ $order->cart->getNbObjects() }}</span>
+                                            <span id="cart-total-objects">{{ $order->getNbObjects() }}</span>
                                             article(s)
                                         </strong>
                                     </div>
                                     <div class="col-4 text-right">
-                                        <span id="cart-total-price">{{ $order->cart->getTotal() }}</span> €
+                                        <span id="cart-total-price">{{ $order->getTotal() }}</span> €
                                     </div>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                                             </strong>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span id="cart-total-price">{{ $order->delivery_price + $order->cart->getTotal() }}</span> €
+                                            <span id="cart-total-price">{{ $order->delivery_price + $order->getTotal() }}</span> €
                                         </div>
                                     </div>
                                 </div>
