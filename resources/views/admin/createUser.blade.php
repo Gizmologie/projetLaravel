@@ -19,10 +19,11 @@
                 <label>email</label>
                 <input type="text" class="form-control" name="email"  required>
             </div>
-            <div class="form-group">
-                <label>roles</label>
-                <input type="text" class="form-control" name="roles" required>
-            </div>
+            <select class="form-control" name="roles">
+                <option value="user">Utilisateur</option>
+                <option value="admin">Administrateur</option>
+            </select>
+
             <button type="submit" class="btn btn-primary">Créer</button>
             @include('components.form.errors')
         </form>

@@ -14,10 +14,10 @@
             <label>email</label>
             <input type="text" class="form-control" name="email" value="{{$user->email}}" required>
         </div>
-        <div class="form-group">
-            <label>roles</label>
-            <input type="text" class="form-control" name="roles" value="{{$user->roles}}">
-        </div>
+        <select class="form-control" name="roles">
+            <option value="user">Utilisateur</option>
+            <option value="admin">Administrateur</option>
+        </select>
         <button type="submit" class="btn btn-primary">Modifier</button>
         @include('components.form.errors')
     </form>
