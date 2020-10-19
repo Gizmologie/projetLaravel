@@ -11,7 +11,7 @@
                     <div class="mt-3">
                         <h4>{{$user->name}}</h4>
                         <a href="{{route('updatePassword', ['id' => $user->id])}}" class="btn btn-outline-warning">Modifier mot de passe</a>
-                        <button class="btn btn-outline-danger">Supprimer</button>
+{{--                        <button class="btn btn-outline-danger">Supprimer</button>--}}
                     </div>
                 </div>
             </div>

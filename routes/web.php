@@ -63,7 +63,10 @@ Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
 
 // Route authentification
 Route::post('/mailResetPassword', 'AdminController@mailResetPassword')->name('mailResetPassword');
-Route::post('/resetPassword', 'AdminController@resetPassword')->name('resetPassword'); 
+//Route::post('/resetPassword', 'AccountController@resetPassword')->name('resetPassword');
+Route::post('/resetPasswordWithToken', 'AccountController@resetPasswordWithToken')->name('resetPasswordWithToken');
+Route::get('/reset/{token}', 'AccountController@changePasswordLink')->name('changePasswordLink');
+Route::post('/resetPassword', 'AccountController@resetPassword')->name('resetPassword');
 
 
 // Route panier
@@ -75,6 +78,8 @@ Route::post('/commande/livraison/validation', [OrderController::class, 'step1Con
 Route::get('/commande/paiement', [OrderController::class, 'step2'])->name('orderStep2');
 Route::get('/commande/terminee', [OrderController::class, 'step3'])->name('orderStep3');
 Route::get('/commande/session', [OrderController::class, 'session'])->name('orderSession');
+
+
 
 // Route authentification
 Route::get('/login', function () {

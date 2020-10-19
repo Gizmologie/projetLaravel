@@ -26,14 +26,14 @@
                         <td>{{$user->created_at->format('d/m/Y à H:m')}}</td>
                         <td class="d-flex">
                             <a href="{{route('detailsUser', ['id' => $user->id])}}" class="btn btn-warning">
-                                <span class="icon icon-pencil"></span>
+                                <i class="fas fa-pencil-alt"></i>
                             </a>
 
                             <form action="{{route('deleteUser', ['id' => $user->id])}}" method="post">
                                 @csrf
                                 @method('delete')
                                 <button type="submit" class="btn btn-danger">
-                                    <span class="icon icon-cross"></span>
+                                    <i class="fas fa-times"></i>
                                 </button>
                             </form>
                         </td>

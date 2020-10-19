@@ -206,7 +206,6 @@ class AdminController extends Controller
                     ], 'Reset Password', 'mails.resetPassword', ['user' => $user, 'code' =>$code]);
             }
         }
-
         return view('pages.mail.codeVerification')
             ->with('email', $email)
             ->with('code', $code);
@@ -214,6 +213,7 @@ class AdminController extends Controller
     }
 
     /**
+     * ne fonctionne pas
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
