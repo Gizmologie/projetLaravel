@@ -48,19 +48,6 @@
                 <hr>
                 <div class="row">
                     <div class="col-sm-3">
-                        <h6 class="mb-0">Status compte</h6>
-                    </div>
-                    <div class="col-sm-9 text-secondary">
-                        @if($user->is_active == 0)
-                            Inactif
-                        @else
-                            Actif
-                        @endif
-                    </div>
-                </div>
-                <hr>
-                <div class="row">
-                    <div class="col-sm-3">
                         <h6 class="mb-0">Date de création</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
