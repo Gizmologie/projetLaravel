@@ -10,15 +10,15 @@
 @section('content')
     <div class="row mb-5">
         <div class="col-12 text-center">
-            @include('components.order.state', ['active' => $active])
+            @include('components.order.process_state', ['active' => $active])
         </div>
         <div class="col-12">
             <div class="row">
-                <div class="col-lg-8 my-1 order-1 order-md-0">
+                <div class="@if($active === 3)col-12 @else col-lg-8 @endif my-1 order-1 order-md-0">
                     @section('process')
                     @show
                 </div>
-                <div class="col-lg-4 order-sm-2 my-1 order-0 order-md-1">
+                <div class="col-lg-4 order-sm-2 my-1 order-0 order-md-1 @if($active === 3) d-none @endif">
                     <div class="card card-border-none shadow">
                         <div class="text-center mt-3">
                             <h4>Votre commande</h4>

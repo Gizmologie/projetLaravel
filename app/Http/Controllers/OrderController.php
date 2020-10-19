@@ -96,14 +96,12 @@ class OrderController extends Controller
 
        if ($request->get('state') === 'success'){
             $order->update([
-                'state' => OrderStateEnum::$DELIVERY_IN_PROCESS
+                'state' => OrderStateEnum::$ACCEPTED
             ]);
        }else{
            $order->delete();
        }
 
-       dump('TODO : redirection sur le suivi');
-       die;
 
         return view('pages.order.step3')
             ->with('order', $order)
@@ -135,7 +133,7 @@ class OrderController extends Controller
         }
 
         /** @var Order $order */
-        $order = Order::where('user_id','=', $user->id)->where('state', '!=', OrderStateEnum::$DELIVERY_IN_PROCESS)->first();
+        $order = Order::where('user_id','=', $user->id)->whereIn('state', [OrderStateEnum::$CREATED, OrderStateEnum::$DELIVERY_IN_PROCESS, OrderStateEnum::$BILLING_SETUP])->first();
 
         if (!$order){
 

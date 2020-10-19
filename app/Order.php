@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use App\Enum\OrderStateEnum;
 
 class Order extends Model
 {
@@ -64,5 +65,18 @@ class Order extends Model
 
     public function getFullDeliveryLabel(){
         return $this->delivery_name . " " . $this->delivery_address . " " . $this->delivery_zipCode . " " . $this->delivery_city;
+    }
+
+    public function getDeliveryStateNumber(){
+        switch ($this->state){
+            case OrderStateEnum::$ACCEPTED;
+                return 1;
+            case OrderStateEnum::$DELIVERY_IN_PROCESS;
+                return 2;
+            case OrderStateEnum::$FINISHED:
+                return 3;
+            default:
+                return 0;
+        }
     }
 }

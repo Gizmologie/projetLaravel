@@ -31,7 +31,6 @@
 @endsection
 
 @section('javascript')
-    <script src="{{ asset('colissimo-scrapper') }}"></script>
     <script src="https://js.stripe.com/v3/"></script>
 
     <script type="text/javascript">
