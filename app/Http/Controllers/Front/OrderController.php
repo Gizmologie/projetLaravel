@@ -148,7 +148,7 @@ class OrderController extends Controller
         }
 
         /** @var Order $order */
-        $order = Order::where('user_id','=', $user->id)->whereIn('state', [OrderStateEnum::$CREATED, OrderStateEnum::$DELIVERY_SETUP, OrderStateEnum::$BILLING_SETUP, OrderStateEnum::$ACCEPTED])->first();
+        $order = Order::where('user_id','=', $user->id)->whereIn('state', [OrderStateEnum::$CREATED, OrderStateEnum::$DELIVERY_SETUP, OrderStateEnum::$BILLING_SETUP])->first();
 
         if (!$order){
 
