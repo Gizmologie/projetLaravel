@@ -42,11 +42,7 @@ class AccountController extends Controller
         $email = $params['email'];
         $user_id = User::where('email', $email)->get('id');
         $date = date('d/m/Y h:i:s', time());
-        /*$token = array(
-            "user_id" => base64_encode ($user_id),
-            "date" => base64_encode ($date)
-        );
-        $token_reset_password = json_encode($token);*/
+
         $token_reset_password = base64_encode($user_id);
 
         DB::table('users')->where('email', '=', $email)->update([

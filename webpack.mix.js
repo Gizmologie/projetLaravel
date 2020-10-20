@@ -18,3 +18,4 @@ mix
 .sass('resources/sass/app.scss', 'public/css')
 .sass('resources/sass/order.scss', 'public/css')
 .sass('resources/sass/product-list.scss', 'public/css')
+.sass('resources/sass/form.scss', 'public/css')
