@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use App\User;
+use http\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -47,6 +48,7 @@ class AdminUserController extends Controller
         $params = $request->validated();
         $params['is_active'] = 0;
         $params['password'] = Hash::make($params['password']);
+        $users = User::all();
         User::create($params);
         return redirect()->route('adminUser');
     }

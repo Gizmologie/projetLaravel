@@ -60,6 +60,9 @@ class CatalogueController extends Controller
         ]);
     }
 
+    /**
+     * @param Request $request
+     */
     private function filter(Request $request){
         $categories = $request->query->get('categories', []);
 
@@ -97,5 +100,11 @@ class CatalogueController extends Controller
 
         $this->results = $this->results->orderBy('price');
         $this->results = $this->results->paginate(18);
+    }
+
+    public function promotion ()
+    {
+        $products = Product::whereNotNull('promotion')->get();
+        return view('pages.catalogue.promotion')->with('products', $products);
     }
 }
