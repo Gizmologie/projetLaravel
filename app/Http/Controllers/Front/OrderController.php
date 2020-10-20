@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Cart;
 use App\Enum\OrderStateEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderDeliveryInformations;
 use App\Order;
 use App\Services\MailerService;

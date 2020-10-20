@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\GivenMailRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Services\MailerService;
@@ -10,8 +11,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Str;
 use Symfony\Component\Translation\Exception\NotFoundResourceException;
 
 class AccountController extends Controller

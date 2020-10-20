@@ -1,15 +1,15 @@
 <?php
 
-use App\Http\Controllers\AccountController;
+use App\Http\Controllers\Front\AccountController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CommentController;
+use App\Http\Controllers\Front\CartController;
+use App\Http\Controllers\Front\CommentController;
 use App\Http\Controllers\Front\CatalogueController;
 use App\Http\Controllers\Front\IndexController;
 use App\Http\Controllers\Front\ProductController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\Front\OrderController;
+use App\Http\Controllers\Front\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
