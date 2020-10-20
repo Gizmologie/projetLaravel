@@ -44,12 +44,12 @@ Route::get('/mes-commandes/telechargement/{id}', 'UserController@orderDownload')
 
 Route::group(['middleware' => ['admin']], function () {
     // Administation User
-    Route::get('/admin/user', 'AdminUserController@indexUser')->name('adminUser');
-    Route::get('/admin/user/details/{id}', 'AdminUserController@detailsUser')->name('detailsUser'); // route vers page
-    Route::get('/admin/user/create', 'AdminUserController@createUser')->name('createUser');
-    Route::post('/admin/user/store', 'AdminUserController@storeUser')->name('storeUser');
-    Route::post('/admin/user/update/{id}', 'AdminUserController@updateUser')->name('updateUser');
-    Route::delete('/admin/user/delete/{id}', 'AdminUserController@removeUser')->name('deleteUser');
+    Route::get('/admin/utilisateur', 'AdminUserController@indexUser')->name('adminUser');
+    Route::get('/admin/utilisateur/details/{id}', 'AdminUserController@detailsUser')->name('detailsUser'); // route vers page
+    Route::get('/admin/utilisateur/create', 'AdminUserController@createUser')->name('createUser');
+    Route::post('/admin/utilisateur/store', 'AdminUserController@storeUser')->name('storeUser');
+    Route::post('/admin/utilisateur/maj/{id}', 'AdminUserController@updateUser')->name('updateUser');
+    Route::delete('/admin/utilisateur/supprimer/{id}', 'AdminUserController@removeUser')->name('deleteUser');
 
     // Administration Product
     Route::get('/admin/product', 'AdminProductController@indexProduct')->name('adminProduct');

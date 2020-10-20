@@ -8,12 +8,12 @@
         <form method="post" action="{{route('storeUser')}}">
             @csrf
             <div class="form-group">
-                <label>email</label>
-                <input type="text" class="form-control" name="email"  required>
-            </div>
-            <div class="form-group">
                 <label>Nom de l'utilisateur</label>
                 <input type="text" class="form-control" name="name"  required>
+            </div>
+            <div class="form-group">
+                <label>email</label>
+                <input type="text" class="form-control" name="email"  required>
             </div>
             <div class="form-group">
                 <label>Mot de passe</label>

@@ -1,4 +1,5 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+<p align="center"><a href="https://github.com/Gizmologie/projetLaravel" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+
 
 
 
@@ -6,12 +7,8 @@
 
 ## Equipe 
 
-Benjamin ROBERT,
+Benjamin ROBERT <br>
 Aurélien GUILLEMOT
-
-## Information 
- 
-Nom de la BDD : projet_ecommerce
 
 
 ## Procedure d'installation 
@@ -26,12 +23,12 @@ Nom de la BDD : projet_ecommerce
 
 Dans le fichier .env, ajouter à la fin :
 
-    MJ_APIKEY_PUBLIC=(clé_envoyé_par_mail)
-    MJ_APIKEY_PRIVATE=(clé_envoyé_par_mail)
+    MJ_APIKEY_PUBLIC=(clé fournis)
+    MJ_APIKEY_PRIVATE=(clé fournis)
     
 ## Modification fichier de configuration
 
-fichier : database.php 
+Fichier : database.php 
 <br>
 Dans 'connections' => 'mysql'
 
@@ -43,3 +40,12 @@ par
     'engine' => 'InnoDB',
 
 
+## seed utilisateur
+
+Il existe 2 utilisateurs prédéfinis :
+
+email : user@user.com <br>
+mot de passe : user
+
+email : admin@admin.com <br>
+mot de passe : admin
