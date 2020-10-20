@@ -41,4 +41,9 @@ class User extends Authenticatable
     public function getOrders(){
         return $this->hasMany(Order::class)->get();
     }
+
+    public function getComments(){
+        return $this->hasMany(Comment::class)->get();
+
+    }
 }

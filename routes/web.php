@@ -35,7 +35,7 @@ Route::get('/testMail', [ProductController::class, 'testMail']);
 Route::get('/produit/{category}/{slug}', [ProductController::class, 'productDetails'])->name('productDetails');
 
 // Route Commentaire
-Route::post('storeComment/{product_id}', [CommentController::class, 'storeComment'])->name('storeComment');
+Route::get('storeComment/{product_id}', [CommentController::class, 'storeComment'])->name('storeComment');
 Route::delete('deleteComment/{id}', [CommentController::class, 'removeComment'])->name('deleteComment');
 
 // Route utilisateur

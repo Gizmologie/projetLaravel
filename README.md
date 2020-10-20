@@ -1,8 +1,6 @@
 <p align="center"><a href="https://github.com/Gizmologie/projetLaravel" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
 
-
-
 # <b>Projet e-commerce Laravel</b>
 
 ## Equipe 
@@ -23,8 +21,12 @@ Aurélien GUILLEMOT
 
 Dans le fichier .env, ajouter à la fin :
 
-    MJ_APIKEY_PUBLIC=(clé fournis)
-    MJ_APIKEY_PRIVATE=(clé fournis)
+    MJ_APIKEY_PUBLIC=(clé fournie)
+    MJ_APIKEY_PRIVATE=(clé fournie)
+    
+    STRIPE_PUBLIC=(clé fournie)
+    STRIPE_SECRET=(clé fournie)
+
     
 ## Modification fichier de configuration
 
@@ -49,3 +51,5 @@ mot de passe : user
 
 email : admin@admin.com <br>
 mot de passe : admin
+
+!! Si vous vous connextez avec le user de base vous ne recevrez pas les mails 

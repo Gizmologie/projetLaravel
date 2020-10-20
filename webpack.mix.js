@@ -13,6 +13,7 @@ const mix = require('laravel-mix');
 
 mix
 .js('resources/js/cart_update.js', 'public/js')
+.js('resources/js/comment.js', 'public/js')
 .js('resources/js/app.js', 'public/js')
     .copyDirectory('storage/app/public', 'public/images')
 .sass('resources/sass/app.scss', 'public/css')

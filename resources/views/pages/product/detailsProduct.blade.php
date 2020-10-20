@@ -65,7 +65,20 @@
         </div>
     </div>
 
-    <div class="row my-5 py-5" id="like">
+    <div class="row py-5">
+        <div class="col-12 text-center mb-4">
+            <hr class="mx-auto">
+            <h3>Les avis de nos clients</h3>
+        </div>
+        @foreach($comments as $comment)
+            <div class="col-12 col-md-4">
+                @include('partials.product.comment')
+            </div>
+        @endforeach
+
+    </div>
+
+    <div class="row my-5 " id="like">
         <div class="col-12 text-center mb-4">
             <hr class="mx-auto">
             <h3>Vous aimerez aussi</h3>
@@ -79,9 +92,6 @@
        </div>
     </div>
 
-
-{{--        @include('pages.product.commentModal')--}}
-{{--        @include('pages.product.comment')--}}
 @endsection
 
 @section('javascript')
