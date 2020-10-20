@@ -100,7 +100,7 @@ class CatalogueController extends Controller
         $this->results = $this->results->where('stock_quantity', '>', 0);
 
         $this->results = $this->results->orderBy('price');
-        $this->results = $this->results->paginate(9);
+        $this->results = $this->results->paginate(9)->appends(request()->except('page'));
     }
 
 }
