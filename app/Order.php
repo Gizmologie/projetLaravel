@@ -77,12 +77,17 @@ class Order extends Model
 
     public function getDeliveryStateNumber(){
         switch ($this->state){
-            case OrderStateEnum::$ACCEPTED;
+            case OrderStateEnum::$DELIVERY_SETUP:
                 return 1;
-            case OrderStateEnum::$DELIVERY_IN_PROCESS;
+            case OrderStateEnum::$BILLING_SETUP:
                 return 2;
-            case OrderStateEnum::$FINISHED:
+            case OrderStateEnum::$ACCEPTED:
                 return 3;
+            case OrderStateEnum::$DELIVERY_IN_PROCESS:
+                return 4;
+            case OrderStateEnum::$FINISHED:
+                return 5;
+            case OrderStateEnum::$CREATED:
             default:
                 return 0;
         }

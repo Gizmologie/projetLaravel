@@ -16,7 +16,7 @@
                 <div class="col-12">
                     @include('components.order.delivery_state')
                 </div>
-                <div class="col-12 text-center">
+                <div class="col-12 text-center mt-4">
                     <a href="{{ route('userOrderDownload', ['id' => $order->id]) }}" class="btn btn-primary">Télécharger le résumé</a>
                 </div>
             </div>
