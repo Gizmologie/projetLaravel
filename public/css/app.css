@@ -10954,13 +10954,78 @@ a.text-dark:focus {
   box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.1);
 }
 
-.bgr-success {
-  background-color: #2ecc71 !important;
-}
-
 .card-link a,
 .card-link a:hover {
   text-decoration: none;
+}
+
+.card-title > h6 {
+  font-weight: 200;
+}
+
+.btn-product-buy {
+  margin: 0.375rem;
+  text-transform: uppercase;
+  word-wrap: break-word;
+  white-space: normal;
+  cursor: pointer;
+  border-radius: 0.125rem;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  padding: 0.75rem 2.14rem;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  font-size: 0.81rem;
+  color: #265c78 !important;
+  background-color: transparent !important;
+  border: 2px solid #265c78 !important;
+}
+
+/* Make the tag position relative to the figure */
+
+.figure.tag {
+  position: relative;
+}
+
+/* set the base styles all tags should use */
+
+.figure.tag::before {
+  position: absolute;
+  top: 10%;
+  left: 5%;
+  display: block;
+  color: white;
+  padding: 0.4rem 0.8rem;
+  font-weight: lighter;
+  font-size: 10px;
+  border-radius: 20px;
+  background: #265c78;
+}
+
+/* Specific variations for different tags */
+
+.tag-promotion-1::before {
+  content: "-10 %";
+}
+
+.tag-promotion-2::before {
+  content: "-20 %";
+}
+
+.tag-promotion-3::before {
+  content: "-30 %";
+}
+
+.tag-promotion-4::before {
+  content: "-40 %";
+}
+
+.tag-promotion-5::before {
+  content: "-50 %";
+}
+
+.bgr-success {
+  background-color: #2ecc71 !important;
 }
 
 hr {
@@ -10973,9 +11038,5 @@ hr {
 
 .text-color {
   color: #265c78;
-}
-
-.card-title > h6 {
-  font-weight: 200;
 }
 
