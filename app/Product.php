@@ -19,6 +19,7 @@ class  Product extends Model
         'slug',
         'functional_description',
         'technical_description',
+        'description',
         'price',
         'base_price',
         'stock_quantity',

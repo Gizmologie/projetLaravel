@@ -15,7 +15,7 @@
             <input type="number" class="form-control" name="base_price" required>
         </div>
         <div class="form-group">
-            <label>Stock</label>
+            <label>Quantité</label>
             <input type="number" class="form-control" name="stock_quantity"  required>
         </div>
         <div class="form-group">
@@ -27,13 +27,8 @@
             <input type="date" class="form-control" name="available_at">
         </div>
         <div class="form-group">
-            <label>Descritpion Fonctionnelle</label>
-            <textarea type="input" rows="5" class="form-control" name="functional_description" required>
-            </textarea>
-        </div>
-        <div class="form-group">
-            <label>Description Technique</label>
-            <textarea type="input" rows="5" class="form-control" name="technical_description" required>
+            <label>Description</label>
+            <textarea type="input" rows="5" class="form-control" name="description" required>
             </textarea>
         </div>
         <div class="form-group">

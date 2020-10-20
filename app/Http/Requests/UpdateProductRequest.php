@@ -29,8 +29,9 @@ class UpdateProductRequest extends FormRequest
             'price' => 'required|numeric',
             'stock_quantity' => 'required|integer',
             'promotion' => 'nullable|numeric',
-            'functional_descritpion' => '',
-            'technical_descritpion' => '',
+            //'functional_descritpion' => '',
+            //'technical_descritpion' => '',
+            'descritpion' => '',
         ];
     }
 }
