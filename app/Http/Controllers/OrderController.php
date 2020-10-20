@@ -6,6 +6,7 @@ use App\Cart;
 use App\Enum\OrderStateEnum;
 use App\Http\Requests\OrderDeliveryInformations;
 use App\Order;
+use App\Services\MailerService;
 use App\Services\StripeService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -21,14 +22,20 @@ class OrderController extends Controller
      * @var StripeService
      */
     private $stripeService;
+    /**
+     * @var MailerService
+     */
+    private $mailerService;
 
     /**
      * OrderController constructor.
      * @param StripeService $stripeService
+     * @param MailerService $mailerService
      */
-    public function __construct(StripeService $stripeService)
+    public function __construct(StripeService $stripeService, MailerService $mailerService)
     {
         $this->stripeService = $stripeService;
+        $this->mailerService = $mailerService;
     }
 
     public function step1(Request $request){
@@ -95,6 +102,13 @@ class OrderController extends Controller
         }
 
        if ($request->get('state') === 'success'){
+           if ($order->state !== OrderStateEnum::$ACCEPTED){
+               $this->mailerService->sendMail(
+                   ['Email' => 'benjamin.robert90@gmail.com', 'Name' => $order->user()->name],
+                   'Commande n°' . $order->id,
+                   'mails.orderSuccess', ['order' => $order]
+               );
+           }
             $order->update([
                 'state' => OrderStateEnum::$ACCEPTED
             ]);
@@ -133,7 +147,7 @@ class OrderController extends Controller
         }
 
         /** @var Order $order */
-        $order = Order::where('user_id','=', $user->id)->whereIn('state', [OrderStateEnum::$CREATED, OrderStateEnum::$DELIVERY_IN_PROCESS, OrderStateEnum::$BILLING_SETUP])->first();
+        $order = Order::where('user_id','=', $user->id)->whereIn('state', [OrderStateEnum::$CREATED, OrderStateEnum::$DELIVERY_SETUP, OrderStateEnum::$BILLING_SETUP, OrderStateEnum::$ACCEPTED])->first();
 
         if (!$order){
 

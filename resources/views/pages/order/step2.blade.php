@@ -22,7 +22,7 @@
         var checkoutButton = document.getElementById("checkout-button");
 
         checkoutButton.addEventListener("click", function () {
-
+            checkoutButton.innerHTML = 'Chargement ...'
             fetch("{{ route('orderSession') }}", {
 
                 method: "GET",

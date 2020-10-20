@@ -38469,10 +38469,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _fortawesome_fontawesome_free_js_all_min__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_fortawesome_fontawesome_free_js_all_min__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./cart */ "./resources/js/cart.js");
 /* harmony import */ var _cart__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_cart__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./product */ "./resources/js/product.js");
-/* harmony import */ var _product__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_product__WEBPACK_IMPORTED_MODULE_5__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
-
 
 
 
@@ -38549,33 +38546,6 @@ document.addEventListener('loadCart', function () {
     console.log(response);
   });
 });
-
-/***/ }),
-
-/***/ "./resources/js/product.js":
-/*!*********************************!*\
-  !*** ./resources/js/product.js ***!
-  \*********************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-window.onload = function () {
-  document.getElementById("technical").onclick = function () {
-    document.getElementById("technical_description").style.display = "block";
-    document.getElementById("functional_description").style.display = "none";
-    var btn = document.getElementsByClassName("functional")[0];
-    btn.className = btn.className.replace("active", "");
-    this.className += " active";
-  };
-
-  document.getElementById("functional").onclick = function () {
-    document.getElementById("functional_description").style.display = "block";
-    document.getElementById("technical_description").style.display = "none";
-    var btn = document.getElementsByClassName("technical")[0];
-    this.className += " active";
-    btn.className = btn.className.replace("active", "");
-  };
-};
 
 /***/ }),
 

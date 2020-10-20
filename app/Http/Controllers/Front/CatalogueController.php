@@ -54,7 +54,7 @@ class CatalogueController extends Controller
 
         return view('pages.catalogue.list', [
             'products' => $products,
-            'categories' => Category::where('level', '=', 1)->get(),
+            'categories' => Category::where('level', '=', 0)->get(),
             'selected' => $this->selected,
             'paginator' => $this->results,
         ]);

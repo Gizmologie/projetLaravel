@@ -24,20 +24,6 @@
                             <h4>Votre commande</h4>
                         </div>
                         <div class="row p-2">
-                            @if($order->delivery_name)
-                                <div class="col-12 mb-2">
-                                    <div class="row">
-                                        <div class="col-8 text-left">
-                                            <strong>
-                                                Livraison :
-                                            </strong>
-                                        </div>
-                                        <div class="col-4 text-right">
-                                            <span id="cart-total-price">{{ $order->delivery_price }}</span> €
-                                        </div>
-                                    </div>
-                                </div>
-                            @endif
                             <div class="col-12">
                                 <div class="row">
                                     <div class="col-8 text-left">
@@ -53,6 +39,18 @@
                             </div>
                             @if($order->delivery_name)
                                 <div class="col-12 my-2">
+                                    <div class="row">
+                                        <div class="col-8 text-left">
+                                            <strong>
+                                                Livraison :
+                                            </strong>
+                                        </div>
+                                        <div class="col-4 text-right">
+                                            <span id="cart-total-price">{{ $order->delivery_price }}</span> €
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 mb-2">
                                     <div class="row">
                                         <div class="col-8 text-left">
                                             <strong>

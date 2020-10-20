@@ -95,7 +95,11 @@
                         </div>
                     </div>
                     <p class="text-center">
-                        <a class="btn btn-primary" href="{{ route('userOrderShow', ['id' => $order->id]) }}">Consulter</a>
+                        @if($order->getDeliveryStateNumber() < 3)
+                            <a class="btn btn-primary" href="{{ route('orderStep1') }}">Continuer</a>
+                        @else
+                            <a class="btn btn-primary" href="{{ route('userOrderShow', ['id' => $order->id]) }}">Consulter</a>
+                        @endif
                     </p>
                  </div>
             </div>
