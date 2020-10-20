@@ -27,15 +27,13 @@
             <input type="number" class="form-control" name="promotion" value="{{$product->promotion}}">
         </div>
         <div class="form-group">
-            <label>Description Fonctionnelle</label>
-            <textarea type="input" rows="5" class="form-control" name="functional_description" required>
-                {{$product->functional_description}}
-            </textarea>
+            <label>Image</label>
+            <input type="file" name="image" accept="image/png" class="form-control">
         </div>
         <div class="form-group">
             <label>Description Technique</label>
-            <textarea type="input" rows="5" class="form-control" name="technical_description" required>
-                {{$product->technical_description}}
+            <textarea type="input" rows="5" class="form-control" name="description" required>
+                {{$product->description}}
             </textarea>
         </div>
 

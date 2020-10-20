@@ -30,8 +30,9 @@ class StoreProductRequest extends FormRequest
             'promotion' => 'nullable|numeric',
             //'price' => 'required|numeric', calculé dans la méthode
             'stock_quantity' => 'required',
-            'functional_description' => 'required',
-            'technical_description' => 'required',
+            //'functional_description' => 'required',
+            'description' => 'required',
+            //'technical_description' => 'required',
             'image' => 'required|image',
             'available_at' => 'required', // |date strtotime (forme de la date)
         ];

@@ -34,6 +34,25 @@ class ProductController extends Controller
     }
 
     /**
+     * @param StoreProductRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeProduct (StoreProductRequest $request)
+    {
+        $params = $request->validated();
+        $params['slug'] = Str::slug($params['name'], '-');
+        Storage::put('public/products', $params['image']);
+        $params['image'] = 'products/'. $params['image']->hashName();
+        if(isset($params['promotion'])) {
+            $params['price'] = $params['base_price'] - ($params['base_price'] * ($params['promotion']/100));
+        } else {
+            $params['price'] = $params['base_price'];
+        }
+        Product::create($params);
+        return redirect()->route('adminProduct');
+    }
+
+    /**
      * @param UpdateProductRequest $request
      * @param $id
      * @return \Illuminate\Http\RedirectResponse
@@ -41,8 +60,20 @@ class ProductController extends Controller
     public function updateProduct (UpdateProductRequest $request, $id)
     {
         $params = $request->validated();
-        $post = Product::findOrFail($id);
-        $post->update($params);
+        $product = Product::findOrFail($id);
+        $params['image'] = isset($params['image']) ? $params['image'] : null;
+
+        $isImage = $params['image'];
+        $params['image'] = $product->image;
+
+        if($isImage!== null)
+        {
+            Storage::delete('products/'.$product->image);
+            Storage::put('public/products', $isImage);
+            $params['image'] = 'posts/'. $isImage->hashName();
+        }
+
+        $product->update($params);
         return redirect()->route('adminProduct');
     }
 
@@ -68,22 +99,5 @@ class ProductController extends Controller
         return view('admin.product.create')->with('categories', $categories);
     }
 
-    /**
-     * @param StoreProductRequest $request
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function storeProduct (StoreProductRequest $request)
-    {
-        $params = $request->validated();
-        $params['slug'] = Str::slug($params['name'], '-');
-        Storage::put('public/products', $params['image']);
-        $params['image'] = 'products/'. $params['image']->hashName();
-        if(isset($params['promotion'])) {
-            $params['price'] = $params['base_price'] - ($params['base_price'] * ($params['promotion']/100));
-        } else {
-            $params['price'] = $params['base_price'];
-        }
-        Product::create($params);
-        return redirect()->route('adminProduct');
-    }
+
 }

@@ -19,12 +19,14 @@ class  Product extends Model
         'slug',
         'functional_description',
         'technical_description',
+        'description',
         'price',
         'base_price',
         'stock_quantity',
         'promotion',
         'image',
         'available_at',
+        'category_id',
     ];
 
     public function getImage(){
