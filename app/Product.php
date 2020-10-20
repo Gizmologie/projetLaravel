@@ -26,6 +26,7 @@ class  Product extends Model
         'promotion',
         'image',
         'available_at',
+        'category_id',
     ];
 
     public function getImage(){
