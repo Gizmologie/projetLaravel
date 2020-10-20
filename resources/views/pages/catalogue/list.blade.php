@@ -29,7 +29,7 @@
             @endforeach
             <div class="row">
                 <div class="col-12 text-center">
-                    {!! $paginator->links() !!}
+                    {{ $paginator->links()}}
                 </div>
             </div>
         </div>
