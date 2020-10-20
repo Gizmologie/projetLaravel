@@ -11040,3 +11040,17 @@ hr {
   color: #265c78;
 }
 
+ul.pagination {
+  justify-content: center !important;
+}
+
+.page-item.active .page-link {
+  background-color: #265c78 !important;
+  border-color: #265c78 !important;
+  color: white !important;
+}
+
+.page-link {
+  color: #265c78 !important;
+}
+
