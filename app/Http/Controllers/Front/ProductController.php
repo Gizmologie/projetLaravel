@@ -52,7 +52,7 @@ class ProductController extends Controller
             $line = null;
         }
 
-        $likes = Product::where('category_id', '=', $product->getCategory()->id)->where('id', '!=', $product->id)->limit(4)->get();
+        $likes = Product::where('category_id', '=', $product->getCategory()->id)->where('id', '!=', $product->id)->limit(5)->inRandomOrder()->get();
         $productsLike = [];
         foreach ($likes as $like) {
             $productsLike[] = $like;
