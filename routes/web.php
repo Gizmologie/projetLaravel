@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CatalogueController::class, 'list'])->name('home');
+Route::get('/promotion', [CatalogueController::class, 'promotion'])->name('promotion');
 Route::get('/home', function(){
     return redirect()->route('home');
 });
@@ -59,7 +60,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::delete('/admin/product/delete/{id}', 'AdminProductController@removeProduct')->name('deleteProduct');
 });
 
-
 Route::get('/cart/deleteLine', [CartController::class, 'deleteLine']);
 Route::get('/cart/updateLine', [CartController::class, 'addLine']);
 Route::get('/cart/loadCart', [CartController::class, 'loadCart']);
@@ -71,7 +71,6 @@ Route::post('/resetPasswordWithToken', 'AccountController@resetPasswordWithToken
 Route::get('/reset/{token}', 'AccountController@changePasswordLink')->name('changePasswordLink');
 Route::post('/resetPassword', 'AccountController@resetPassword')->name('resetPassword');
 
-
 // Route panier
 Route::get('/cart', 'CartController@index')->name('cart');
 
@@ -81,8 +80,6 @@ Route::post('/commande/livraison/validation', [OrderController::class, 'step1Con
 Route::get('/commande/paiement', [OrderController::class, 'step2'])->name('orderStep2');
 Route::get('/commande/terminee', [OrderController::class, 'step3'])->name('orderStep3');
 Route::get('/commande/session', [OrderController::class, 'session'])->name('orderSession');
-
-
 
 // Route authentification
 Route::get('/login', function () {
