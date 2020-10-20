@@ -1,6 +1,8 @@
 @extends('layouts.base')
 
 @section('content')
+<input type="hidden" value="{{$user = \Illuminate\Support\Facades\Auth::user()}}">
+
 
 <div class="row gutters-sm mt-5">
     <div class="col-md-4 mb-3">
@@ -11,7 +13,7 @@
                     <div class="mt-3">
                         <h4>{{$user->name}}</h4>
                         <a href="{{route('updatePassword', ['id' => $user->id])}}" class="btn btn-outline-warning">Modifier mot de passe</a>
-                        <button class="btn btn-outline-danger">Supprimer</button>
+{{--                        <button class="btn btn-outline-danger">Supprimer</button>--}}
                     </div>
                 </div>
             </div>

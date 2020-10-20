@@ -24,14 +24,14 @@
                     <td>{{ $product->stock_quantity }}</td>
                     <td class="d-flex">
                         <a href="{{route('detailsProduct', ['id' => $product->id])}}" class="btn btn-warning">
-                            <span class="icon icon-pencil"></span>
+                            <i class="fas fa-pencil-alt"></i>
                         </a>
 
                         <form action="{{route('deleteProduct', ['id' => $product->id])}}" method="post">
                             @csrf
                             @method('delete')
                             <button type="submit" class="btn btn-danger">
-                                <span class="icon icon-cross"></span>
+                                <i class="fas fa-times"></i>
                             </button>
                         </form>
                     </td>

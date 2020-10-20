@@ -55,11 +55,11 @@ class AdminController extends Controller
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function getDetailsUser($id)
+/*    public function getDetailsUser($id)
     {
         $users = User::where('id', $id)->firstOrFail();
         return view('detailsUser')->with('users', $users);
-    }
+    }*/
 
     /**
      * @param $id
@@ -145,6 +145,7 @@ class AdminController extends Controller
     public function storeUser (StoreUserRequest $request)
     {
         $params = $request->validated();
+        $params['is_active'] = 0;
         $params['password'] = Hash::make($params['password']);
         User::create($params);
         return redirect()->route('adminUser');
@@ -206,7 +207,6 @@ class AdminController extends Controller
                     ], 'Reset Password', 'mails.resetPassword', ['user' => $user, 'code' =>$code]);
             }
         }
-
         return view('pages.mail.codeVerification')
             ->with('email', $email)
             ->with('code', $code);
@@ -214,6 +214,7 @@ class AdminController extends Controller
     }
 
     /**
+     * ne fonctionne pas
      * @param Request $request
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */

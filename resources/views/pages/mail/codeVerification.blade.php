@@ -9,7 +9,7 @@
                 <div class="col-sm-12">
                     <div>Un email contenant le code de validation a été envoyé à {{$email}}</div>
 
-                    <form method="post" action="{{route('storeComment', ['product_id' => $product->id])}}">
+                    <form method="post" action="">
                         @csrf
                     <input class="form-control">
                     </form>
@@ -18,3 +18,4 @@
         </div>
     </div>
 @endsection
+

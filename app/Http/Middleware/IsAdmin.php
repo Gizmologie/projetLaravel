@@ -1,9 +1,9 @@
 <?php
 
-
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class IsAdmin
 {
@@ -16,9 +16,10 @@ class IsAdmin
      */
     public function handle($request, Closure $next)
     {
-        if(auth()->user()->isAdmin()) {
+        if (Auth::user() &&  Auth::user()->roles == 'admin') {
             return $next($request);
         }
-        return redirect('home');
+
+        return redirect('home')->with('error','You have not admin access');
     }
 }

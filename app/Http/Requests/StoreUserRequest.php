@@ -27,7 +27,7 @@ class StoreUserRequest extends FormRequest
             'name' => 'required|min:3',
             'email' => 'required|email:rfc,dns',
             'password' => 'required|min:8',
-            'is_active' => 'required',
+            //'is_active' => 'required', not use
             'roles' => 'required',
         ];
     }
