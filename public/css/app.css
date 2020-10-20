@@ -10958,3 +10958,20 @@ a.text-dark:focus {
   background-color: #2ecc71 !important;
 }
 
+.card-link a,
+.card-link a:hover {
+  text-decoration: none;
+}
+
+hr {
+  width: 20%;
+  text-align: left;
+  margin-left: 0;
+  background-color: #265c78;
+  height: 1px;
+}
+
+.text-color {
+  color: #265c78;
+}
+

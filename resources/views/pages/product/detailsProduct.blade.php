@@ -1,79 +1,91 @@
 @extends('layouts.base')
 
+@section('styles')
+    <link rel="stylesheet" href="{{ asset('css/product.css') }}">
+@endsection
+
 @section('content')
-    <div class="card my-3">
-        <div class="row my-3">
-            <div class="col-sm-4">
-                <a><img class="card-img-top" height="300" width="300" src="{{ $product->getImage() }}" alt="{{ $product->name }}"></a>
-            </div>
 
-            <div class="col-sm-6">
-                <div class="row">
-                    <div class="offset-sm-3 col-sm-7 my-5" style="background-color: #F7F7F7"><b>{{$product->name}}</b></div>
-{{--                    <div class="offset-sm-3 col-sm-7">{{$product->getCategory->name}}</div>--}}
-                    <div class="offset-sm-3 col-sm-7" style="background-color: #F7F7F7">Aucun avis pour le moment</div>
-                </div>
-                <br><br>
-                <div class="row" >
-                    <div class="offset-sm-3 col-sm-4" style="background-color: #F7F7F7">
-                        <strong >Prix : </strong>
-                        @if(isset($product->promotion))
-                          <span class="h5">{{$product->price}}€</span> <del class="ml-3">{{$product->base_price}}</del>
-                        @else
-                            <span class="h5">{{$product->price}}€</span>
-                        @endif
-                    </div>
-                    <div class="col-sm-3" style="background-color: #F7F7F7">
-                        @if($product->stock_quantity==0)
-                            <p><strong>Rupture de stock</strong></p>
-                        @else
-                            <p><strong>Stock :</strong> {{$product->stock_quantity}}</p>
-                        @endif
-                    </div>
-                </div>
+    <div class="row pt-5" id="product">
+        <div class="col-12 col-lg-6 text-center">
+            <img src="{{ $product->getImage() }}" alt="{{ $product->name }}">
+        </div>
+        <div class="col-12 col-lg-6 pt-2">
+            <hr class="mx-auto">
+            <h2 class="text-center mb-1">{{ $product->name }}</h2>
+            <div class="text-center">
+                <small class="text-secondary">{{ $product->getCategory()->name }}</small>
             </div>
-            <div class="col-sm-12 my-5">
-
-                <ul class="nav nav-tabs">
-                    <li class="nav-item">
-                        <a class="nav-link active technical" id="technical">Technique</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link functional" id="functional">Fonctionnelle</a>
-                    </li>
-                </ul>
-                <div id="functional_description"  style="display: none;">
-                    <div  class="col">
-                        <br>
-                        <div>
-                            {{ $product->functional_description }}
-                        </div>
-                    </div>
+            @if($product->stock_quantity==0)
+                <div class="text-center pt-2">
+                    <span class="badge badge-danger">Rupture de stock</span>
                 </div>
-                <div id="technical_description"  style="display: block;">
-                    <div  class="col">
-                        <br>
-                        <div>
-                            {{ $product->technical_description }}
-                        </div>
-                    </div>
-                </div>
-                <br><br>
-                @if(\Illuminate\Support\Facades\Auth::check())
-                    <div class="action  d-flex justify-content-center">
-                        <button class="add-to-cart btn btn-warning js-add-to-cart rounded-pill" data-product="{{ $product->id }}" type="button">
-                            Ajouter au panier
-                            @if($total)
-                                ({{ $total }} actuellement)
-                            @endif
-                        </button>
-                    </div>
+            @endif
+            <div class="text-center pt-4" style="color: #265c78">
+                @if(isset($product->promotion))
+                    <span class="h4">{{$product->price}}€</span><br>
+                    <del class="">{{$product->base_price}}</del>
+                @else
+                    <span class="h4">{{$product->price}}€</span>
                 @endif
             </div>
+            <div class="text-center pt-3 w-75 mx-auto text-secondary small">
+                {{ $product->description }}
+            </div>
+            @if(\Illuminate\Support\Facades\Auth::check())
+                <div class="text-center mt-4">
+                    <button class="btn-product-buy w-75 js-add-to-cart" data-product="{{ $product->id }}">
+                        Ajouter au panier
+                        @if($total)
+                            ({{ $total }} actuellement)
+                        @endif
+                    </button>
+                </div>
+            @endif
         </div>
     </div>
-    @include('pages.product.commentModal')
-    @include('pages.product.comment')
+
+    <div class="row d-none d-lg-flex" id="info" style="margin-top: 130px; margin-bottom: 80px">
+        <div class="col-lg-4 text-center border-right">
+            <i class="fas fa-truck text-color fa-lg mb-2"></i>
+            <h6>Livraison en 48h</h6>
+            <p class="small text-secondary px-5">
+                Livraison gratuite en France dès 99€ et en Europe dès 149€
+            </p>
+        </div>
+        <div class="col-lg-4 text-center border-right">
+            <i class="fas fa-exchange-alt text-color fa-lg mb-2"></i>
+            <h6>Retours gratuits</h6>
+            <p class="small text-secondary px-5">
+                Un produit ne vous plaît pas ? Vous avez 30 jours pour nous le retourner
+            </p>
+        </div>
+        <div class="col-lg-4 text-center ">
+            <i class="fas fa-tags text-color fa-lg mb-2"></i>
+            <h6>Meilleurs prix garantis</h6>
+            <p class="small text-secondary px-5">
+                Trouvez un prix inferieur dans les 7 jours et on vous rembourse la différence
+            </p>
+        </div>
+    </div>
+
+    <div class="row my-5 py-5" id="like">
+        <div class="col-12 text-center mb-4">
+            <hr class="mx-auto">
+            <h3>Vous aimerez aussi</h3>
+        </div>
+       <div class="col-10 mx-auto">
+          <div class="card-deck">
+              @foreach($likes as $productLike)
+                  @include('components.product.card', ['product' => $productLike, 'small' => true])
+              @endforeach
+          </div>
+       </div>
+    </div>
+
+
+{{--        @include('pages.product.commentModal')--}}
+{{--        @include('pages.product.comment')--}}
 @endsection
 
 @section('javascript')

@@ -12,6 +12,8 @@ $('.js-add-to-cart').on('click', (e) => {
         document.dispatchEvent(new Event('loadCart'))
         if (response.quantity){
             $(target).html('Ajouter au panier (' + response.quantity + ' actuellement)')
+            swal('C\'est bon', 'Le produit a été ajouté à votre panier', "success")
+
         }
     }).fail((response) => {
         swal('Oups désolé', 'Une erreur s\'est produite', "error")

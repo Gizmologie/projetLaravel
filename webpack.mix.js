@@ -17,4 +17,5 @@ mix
     .copyDirectory('storage/app/public', 'public/images')
 .sass('resources/sass/app.scss', 'public/css')
 .sass('resources/sass/order.scss', 'public/css')
+.sass('resources/sass/product.scss', 'public/css')
 .sass('resources/sass/product-list.scss', 'public/css')

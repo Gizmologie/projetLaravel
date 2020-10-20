@@ -31,20 +31,6 @@ class ProductController extends Controller
     }
 
     /**
-     * @throws \Throwable
-     */
-    public function testMail(){
-        $response = $this->mailerService->sendMail(
-            [
-            'Email' => 'benjamin.robert90@gmail.com',
-            'Name' => 'Benjamin Robert'
-        ], 'Test de mail', 'mails.test', ['param' => 'Coucou c\'est moi']);
-
-       dump($response->success(), $response->getData());
-       die;
-    }
-
-    /**
      * @param $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
@@ -69,6 +55,7 @@ class ProductController extends Controller
         return view('pages.product.detailsProduct')
             ->with('product', $product)
             ->with('comments', $comments)
+            ->with('likes', Product::where('category_id', '=', $product->getCategory()->id)->where('id', '!=', $product->id)->limit(4)->get())
             ->with('total', $line ? $line->quantity : null)
             ;
     }

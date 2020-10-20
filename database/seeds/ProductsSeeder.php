@@ -79,13 +79,8 @@ class ProductsSeeder extends Seeder
             Product::create([
                 'name' => $product['name'],
                 'slug' => Str::slug($product['name']),
-                'functional_description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                    Omnia peccata paria dicitis. Cave putes quicquam esse verius. 
-                    Omnia contraria, quos etiam insanos esse vultis. 
-                    Scaevolam M. Certe non potest. Primum Theophrasti, Strato, physicum se voluit ',
-                'technical_description' => 'Murenam te accusante defenderem. Tubulo putas dicere? Si longus, 
+                'description' => 'Murenam te accusante defenderem. Tubulo putas dicere? Si longus, 
                     levis dictata sunt. Quid sequatur, quid repugnet, vident. 
-                    Respondeat totidem verbis. Duo Reges: constructio interrete. Avaritiamne minuis? Si id dicis, vicimus.
                     Tu enim ista lenius, hic Stoicorum more nos vexat. Duo enim genera quae erant, fecit tria. Non igitur bene. ',
                 'price' => number_format($product['price'] - ($product['price'] * ($promotion / 100)), 2, '.', ''),
                 'base_price' => $product['price'],

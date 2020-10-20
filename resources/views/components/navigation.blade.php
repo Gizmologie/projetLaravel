@@ -24,7 +24,7 @@
             @if(\Illuminate\Support\Facades\Auth::check())
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fas fa-lg fa-user mr-1"></i>{{ \Illuminate\Support\Facades\Auth::user()->name}}
+                        <i class="fas fa-lg fa-user mr-1" ></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{route('profil')}}">Mon compte</a>
