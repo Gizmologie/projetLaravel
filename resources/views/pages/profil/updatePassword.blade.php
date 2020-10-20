@@ -2,9 +2,7 @@
 
 @section('content')
 
-    <h1>Details de {{$user->name}}</h1>
-
-    <form method="post" action="{{route('passwordChange', ['id' => $user->id])}}}">
+    <form method="post" action="{{route('passwordChange')}}}">
         @csrf
         <div class="form-group">
             <label>Mot de passe actuel</label>

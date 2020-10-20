@@ -60,7 +60,7 @@
                                             </strong>
                                         </div>
                                         <div class="col-4 text-right">
-                                            <span id="cart-total-price">{{ $order->delivery_price + $order->getTotal() }}</span> €
+                                            <span id="cart-total-price">{{ $order->getTotalWithDelivery() }}</span> €
                                         </div>
                                     </div>
                                 </div>

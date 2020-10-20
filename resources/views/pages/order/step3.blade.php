@@ -5,7 +5,7 @@
         <div class="col-12 col-md-7">
             <div class="card">
                 <div class="card-header bg-transparent border-bottom-0">
-                    <span class="success-badge"><i class="fas fa-2x fa-check mt-2"></i></span>
+                    <span class="card-badge bgr-success"><i class="fas fa-2x fa-check mt-2"></i></span>
                 </div>
                 <div class="card-body ">
                     <h4 class="text-center">Votre commande a été enregistrée</h4>

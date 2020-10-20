@@ -58,6 +58,10 @@ class Order extends Model
         return $total;
     }
 
+    public function getTotalWithDelivery(){
+        return $this->getTotal() + $this->delivery_price;
+    }
+
     public function user(){
         return $this->hasOne(User::class, 'id', 'user_id')->first();
     }
@@ -65,6 +69,10 @@ class Order extends Model
 
     public function getFullDeliveryLabel(){
         return $this->delivery_name . " " . $this->delivery_address . " " . $this->delivery_zipCode . " " . $this->delivery_city;
+    }
+
+    public function getDeliveryStateName(){
+        return OrderStateEnum::getName($this->state);
     }
 
     public function getDeliveryStateNumber(){
