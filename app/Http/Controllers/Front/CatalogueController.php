@@ -103,9 +103,4 @@ class CatalogueController extends Controller
         $this->results = $this->results->paginate(9);
     }
 
-    public function promotion ()
-    {
-        $products = Product::whereNotNull('promotion')->get();
-        return view('pages.catalogue.promotion')->with('products', $products);
-    }
 }

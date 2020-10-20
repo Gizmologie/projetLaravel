@@ -20,7 +20,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [CatalogueController::class, 'list'])->name('home');
-Route::get('/promotion', [CatalogueController::class, 'promotion'])->name('promotion');
 Route::get('/home', function(){
     return redirect()->route('home');
 });
