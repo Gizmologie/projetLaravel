@@ -27,7 +27,7 @@
                             <i class="fas fa-lg fa-user mr-1"></i>{{ \Illuminate\Support\Facades\Auth::user()->name}}
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="{{route('profil',  ['id' => \Illuminate\Support\Facades\Auth::user()->id])}}">Mon compte</a>
+                        <a class="dropdown-item" href="{{route('profil')}}">Mon compte</a>
                         <a class="dropdown-item" href="{{route('logout')}}">Déconnexion</a>
                     </div>
                 </li>

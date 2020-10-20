@@ -1,5 +1,5 @@
 <div class="bs-stepper vertical linear">
-    <div class="bs-stepper-header" role="tablist">
+    <div class="bs-stepper-header mx-auto" role="tablist">
         <div class="step @if($order->getDeliveryStateNumber() >= 1) done @endif" >
             <button type="button" class="step-trigger" role="tab">
                 <span class="bs-stepper-circle">1</span>

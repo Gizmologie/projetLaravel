@@ -35,11 +35,11 @@ Route::post('storeComment/{product_id}', 'CommentController@storeComment')->name
 Route::delete('deleteComment/{id}', 'CommentController@removeComment')->name('deleteComment');
 
 // Route utilisateur
-//Route::get('/profil/{id}', 'UserController@profil')->name('profil');
-Route::get('/profil', 'UserController@profil')->name('profil');
-Route::get('/updatePassword/{id}', 'UserController@updatePassword')->name('updatePassword');
-Route::post('changePassword/{id}', 'UserController@changePassword')->name('passwordChange');
-
+Route::get('/mon-compte', 'UserController@profil')->name('profil');
+Route::get('/modification-du-mot-de-passe', 'UserController@updatePassword')->name('updatePassword');
+Route::post('changement-du-mot-de-passe', 'UserController@changePassword')->name('passwordChange');
+Route::get('/mes-commandes/commande/{id}', 'UserController@orderShow')->name('userOrderShow');
+Route::get('/mes-commandes/telechargement/{id}', 'UserController@orderDownload')->name('userOrderDownload');
 // Route administration
 
 Route::group(['middleware' => ['admin']], function () {
