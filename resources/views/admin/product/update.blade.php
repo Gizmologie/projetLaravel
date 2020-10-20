@@ -15,11 +15,11 @@
             <input type="text" class="form-control" name="slug" value="{{$product->slug}}" required>
         </div>
         <div class="form-group">
-            <label>Price</label>
+            <label>Prix</label>
             <input type="number" class="form-control" name="price" value="{{$product->price}}"required>
         </div>
         <div class="form-group">
-            <label>Stock Quantity</label>
+            <label>Stock</label>
             <input type="number" class="form-control" name="stock_quantity" value="{{$product->stock_quantity}}" required>
         </div>
         <div class="form-group">
@@ -27,13 +27,13 @@
             <input type="number" class="form-control" name="promotion" value="{{$product->promotion}}">
         </div>
         <div class="form-group">
-            <label>Functional Description</label>
+            <label>Description Fonctionnelle</label>
             <textarea type="input" rows="5" class="form-control" name="functional_description" required>
                 {{$product->functional_description}}
             </textarea>
         </div>
         <div class="form-group">
-            <label>Technical Description</label>
+            <label>Description Technique</label>
             <textarea type="input" rows="5" class="form-control" name="technical_description" required>
                 {{$product->technical_description}}
             </textarea>

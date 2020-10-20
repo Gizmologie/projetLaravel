@@ -14,6 +14,7 @@
             <label>email</label>
             <input type="text" class="form-control" name="email" value="{{$user->email}}" required>
         </div>
+        <label>Role</label>
         <select class="form-control" name="roles">
             <option value="user">Utilisateur</option>
             <option value="admin">Administrateur</option>
