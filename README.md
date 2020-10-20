@@ -9,6 +9,16 @@ Benjamin ROBERT <br>
 Aurélien GUILLEMOT
 
 
+## contexte 
+
+C'est un site de e-commerce qui permet aux visisteurs de visualiser les produits que nous vendons.
+Les produits proposés sont de tous types.
+
+Une fois connecté, l'utilisateur peut enregistrer sa commande dans un panier et simuler un achat.
+
+L'administrateur peut modifier/ supprier des produits et des utilisateurs
+
+
 ## Procedure d'installation 
 
 1. composer install
@@ -51,5 +61,7 @@ mot de passe : user
 
 email : admin@admin.com <br>
 mot de passe : admin
+(compte admin)
+
 
 !! Si vous vous connextez avec le user de base vous ne recevrez pas les mails 
