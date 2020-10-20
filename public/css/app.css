@@ -10975,3 +10975,7 @@ hr {
   color: #265c78;
 }
 
+.card-title > h6 {
+  font-weight: 200;
+}
+

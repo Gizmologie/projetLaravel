@@ -8,7 +8,7 @@
 
     <div class="row pt-5" id="product">
         <div class="col-12 col-lg-6 text-center">
-            <img src="{{ $product->getImage() }}" alt="{{ $product->name }}">
+            <img class="img-fluid" src="{{ $product->getImage() }}" alt="{{ $product->name }}">
         </div>
         <div class="col-12 col-lg-6 pt-2">
             <hr class="mx-auto">
@@ -45,7 +45,7 @@
         </div>
     </div>
 
-    <div class="row d-none d-lg-flex" id="info" style="margin-top: 130px; margin-bottom: 80px">
+    <div class="row d-none d-lg-flex" id="info" style="margin-top: 130px; margin-bottom: 30px">
         <div class="col-lg-4 text-center border-right">
             <i class="fas fa-truck text-color fa-lg mb-2"></i>
             <h6>Livraison en 48h</h6>
@@ -77,7 +77,7 @@
        <div class="col-10 mx-auto">
           <div class="card-deck">
               @foreach($likes as $productLike)
-                  @include('components.product.card', ['product' => $productLike, 'small' => true])
+                  @include('components.product.card', ['product' => $productLike])
               @endforeach
           </div>
        </div>

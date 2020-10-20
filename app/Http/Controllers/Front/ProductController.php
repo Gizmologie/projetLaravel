@@ -52,10 +52,19 @@ class ProductController extends Controller
             $line = null;
         }
 
+        $likes = Product::where('category_id', '=', $product->getCategory()->id)->where('id', '!=', $product->id)->limit(4)->get();
+        $productsLike = [];
+        foreach ($likes as $like) {
+            $productsLike[] = $like;
+        }
+        while (count($productsLike) < 5){
+            $productsLike[] = null;
+        }
+
         return view('pages.product.detailsProduct')
             ->with('product', $product)
             ->with('comments', $comments)
-            ->with('likes', Product::where('category_id', '=', $product->getCategory()->id)->where('id', '!=', $product->id)->limit(4)->get())
+            ->with('likes', $productsLike)
             ->with('total', $line ? $line->quantity : null)
             ;
     }
