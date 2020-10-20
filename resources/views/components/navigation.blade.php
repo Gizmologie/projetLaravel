@@ -9,13 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="{{route('home')}}">Liste</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Promotion</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="">Nouveautés</a>
+                <a class="nav-link" href="{{route('home')}}">Notre catalogue</a>
             </li>
         </ul>
     </div>

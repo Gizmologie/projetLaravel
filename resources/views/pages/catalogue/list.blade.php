@@ -12,7 +12,7 @@
 
 @section('content')
     <div class="row mt-5">
-        <div class="col-md-3 d-none d-md-block">
+        <div class="col-md-3">
             @include('partials.catalogue.list_form')
         </div>
         <div class="col-12 col-md-9">

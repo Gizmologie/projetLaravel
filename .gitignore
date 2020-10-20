@@ -5,6 +5,7 @@
 /public/fonts
 /public/images
 /storage/*.key
+/storage/framework/cache/*
 /vendor
 .env
 .env.backup

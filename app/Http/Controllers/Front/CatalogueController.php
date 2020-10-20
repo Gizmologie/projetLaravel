@@ -52,9 +52,10 @@ class CatalogueController extends Controller
 
         }
 
+
         return view('pages.catalogue.list', [
             'products' => $products,
-            'categories' => Category::where('level', '=', 0)->get(),
+            'categories' => Category::all(),
             'selected' => $this->selected,
             'paginator' => $this->results,
         ]);
@@ -99,12 +100,7 @@ class CatalogueController extends Controller
         $this->results = $this->results->where('stock_quantity', '>', 0);
 
         $this->results = $this->results->orderBy('price');
-        $this->results = $this->results->paginate(18);
+        $this->results = $this->results->paginate(9);
     }
 
-    public function promotion ()
-    {
-        $products = Product::whereNotNull('promotion')->get();
-        return view('pages.catalogue.promotion')->with('products', $products);
-    }
 }
