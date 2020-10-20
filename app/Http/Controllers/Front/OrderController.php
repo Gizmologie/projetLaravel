@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
 use App\Cart;
 use App\Enum\OrderStateEnum;
+use App\Http\Controllers\Controller;
 use App\Http\Requests\OrderDeliveryInformations;
 use App\Order;
 use App\Services\MailerService;
@@ -104,7 +105,7 @@ class OrderController extends Controller
        if ($request->get('state') === 'success'){
            if ($order->state !== OrderStateEnum::$ACCEPTED){
                $this->mailerService->sendMail(
-                   ['Email' => 'benjamin.robert90@gmail.com', 'Name' => $order->user()->name],
+                   ['Email' => $order->user()->email, 'Name' => $order->user()->name],
                    'Commande n°' . $order->id,
                    'mails.orderSuccess', ['order' => $order]
                );
