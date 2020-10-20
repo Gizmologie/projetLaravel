@@ -43,20 +43,20 @@ Route::get('/mes-commandes/telechargement/{id}', 'UserController@orderDownload')
 
 Route::group(['middleware' => ['admin']], function () {
     // Administation User
-    Route::get('/admin/user', 'AdminController@indexUser')->name('adminUser');
-    Route::get('/admin/user/details/{id}', 'AdminController@detailsUser')->name('detailsUser'); // route vers page
-    Route::get('/admin/user/create', 'AdminController@createUser')->name('createUser');
-    Route::post('/admin/user/store', 'AdminController@storeUser')->name('storeUser');
-    Route::post('/admin/user/update/{id}', 'AdminController@updateUser')->name('updateUser');
-    Route::delete('/admin/user/delete/{id}', 'AdminController@removeUser')->name('deleteUser');
+    Route::get('/admin/user', 'AdminUserController@indexUser')->name('adminUser');
+    Route::get('/admin/user/details/{id}', 'AdminUserController@detailsUser')->name('detailsUser'); // route vers page
+    Route::get('/admin/user/create', 'AdminUserController@createUser')->name('createUser');
+    Route::post('/admin/user/store', 'AdminUserController@storeUser')->name('storeUser');
+    Route::post('/admin/user/update/{id}', 'AdminUserController@updateUser')->name('updateUser');
+    Route::delete('/admin/user/delete/{id}', 'AdminUserController@removeUser')->name('deleteUser');
 
     // Administration Product
-    Route::get('/admin/product', 'AdminController@indexProduct')->name('adminProduct');
-    Route::get('/admin/product/create', 'AdminController@createProduct')->name('createProduct');
-    Route::post('/admin/product/store', 'AdminController@storeProduct')->name('storeProduct');
-    Route::get('/admin/product/details/{id}', 'AdminController@detailsProduct')->name('detailsProduct');
-    Route::post('/admin/product/update/{id}', 'AdminController@updateProduct')->name('updateProduct');
-    Route::delete('/admin/product/delete/{id}', 'AdminController@removeProduct')->name('deleteProduct');
+    Route::get('/admin/product', 'AdminProductController@indexProduct')->name('adminProduct');
+    Route::get('/admin/product/create', 'AdminProductController@createProduct')->name('createProduct');
+    Route::post('/admin/product/store', 'AdminProductController@storeProduct')->name('storeProduct');
+    Route::get('/admin/product/details/{id}', 'AdminProductController@detailsProduct')->name('detailsProduct');
+    Route::post('/admin/product/update/{id}', 'AdminProductController@updateProduct')->name('updateProduct');
+    Route::delete('/admin/product/delete/{id}', 'AdminProductController@removeProduct')->name('deleteProduct');
 });
 
 
