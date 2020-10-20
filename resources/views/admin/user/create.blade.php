@@ -23,7 +23,7 @@
                 <option value="user">Utilisateur</option>
                 <option value="admin">Administrateur</option>
             </select>
-
+            <br>
             <button type="submit" class="btn btn-primary">Créer</button>
             @include('components.form.errors')
         </form>

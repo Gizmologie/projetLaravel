@@ -24,7 +24,7 @@
         </div>
         <div class="form-group">
             <label>Disponible le :</label>
-            <input type="string" class="form-control" name="available_at">
+            <input type="date" class="form-control" name="available_at">
         </div>
         <div class="form-group">
             <label>Functional Description</label>
