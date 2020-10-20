@@ -11,11 +11,11 @@
             <input type="text" class="form-control" name="name" required>
         </div>
         <div class="form-group">
-            <label>Price</label>
+            <label>Prix</label>
             <input type="number" class="form-control" name="base_price" required>
         </div>
         <div class="form-group">
-            <label>Stock Quantity</label>
+            <label>Stock</label>
             <input type="number" class="form-control" name="stock_quantity"  required>
         </div>
         <div class="form-group">
@@ -27,12 +27,12 @@
             <input type="date" class="form-control" name="available_at">
         </div>
         <div class="form-group">
-            <label>Functional Description</label>
+            <label>Descritpion Fonctionnelle</label>
             <textarea type="input" rows="5" class="form-control" name="functional_description" required>
             </textarea>
         </div>
         <div class="form-group">
-            <label>Technical Description</label>
+            <label>Description Technique</label>
             <textarea type="input" rows="5" class="form-control" name="technical_description" required>
             </textarea>
         </div>

@@ -19,6 +19,7 @@
                 <label>Mot de passe</label>
                 <input type="password" class="form-control" name="password"  required>
             </div>
+            <label>Role</label>
             <select class="form-control" name="roles">
                 <option value="user">Utilisateur</option>
                 <option value="admin">Administrateur</option>

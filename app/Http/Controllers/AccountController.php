@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GivenMailRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Services\MailerService;
 use App\User;
@@ -35,9 +36,10 @@ class AccountController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @throws \Throwable
      */
-    public function resetPasswordWithToken (Request $request)
+    public function resetPasswordWithToken (GivenMailRequest $request)
     {
-        $email = $request->all()['email'];
+        $params = $request->validated();
+        $email = $params['email'];
         $user_id = User::where('email', $email)->get('id');
         $date = date('d/m/Y h:i:s', time());
         /*$token = array(
@@ -129,7 +131,7 @@ class AccountController extends Controller
 
         //login the user immediately they change password successfully
         Auth::login($user);
-        
+
         //Send Email Reset Success Email
         if ($update) {
             return redirect()->route('home');
